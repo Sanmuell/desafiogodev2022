@@ -1,0 +1,2082 @@
+<wsdl:definitions name="godev2022desafio"
+      targetNamespace="http://www.senior.com.br/godev/godev2022desafio"
+      xmlns="http://www.senior.com.br/godev/godev2022desafio"
+      xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+      xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+      xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+      xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+      xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+    
+    <version number="${version}" />
+    
+    <wsdl:types>
+        <xsd:schema
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.senior.com.br/godev/godev2022desafio"
+            targetNamespace="http://www.senior.com.br/godev/godev2022desafio"
+            elementFormDefault="qualified">
+            
+            <xsd:attribute name="deprecated" type="xsd:string" default=""/>
+            <xsd:attribute name="anonymous" type="xsd:boolean" default="false"/>
+            
+            <xsd:attribute name="i18n" type="xsd:boolean" default="false"/>
+            
+            <!-- Public types -->
+            <xsd:complexType name="patientResponse">
+                <xsd:sequence>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="isAtivo" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="precriptionType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="YELLOW"/>
+                    <xsd:enumeration value="BLUE"/>
+                    <xsd:enumeration value="WHITE"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:complexType name="patient">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="cpf" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="address" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="phone" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <!-- collection wrapper for responsibleDoctors -->
+                    <xsd:element name="responsibleDoctors" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="doctor" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <!-- collection wrapper for responsibleFamilyMembers -->
+                    <xsd:element name="responsibleFamilyMembers" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="responsibleFamilyMember" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <!-- collection wrapper for prescriptions -->
+                    <xsd:element name="prescriptions" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="prescription" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="isAtivo" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false" readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="doctor">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="cpf" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="crmNumber" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="crmState" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="especiality" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <!-- collection wrapper for prescriptions -->
+                    <xsd:element name="prescriptions" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="prescription" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="prescription">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="drug" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="data" type="xsd:date" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="doctorResponsible" type="doctor" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="type" type="precriptionType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="statementOfReponsability" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false" readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="patient" type="patient" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="responsibleFamilyMember">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="cpf" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="kinship" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="userNotificationKind">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Operational"/>
+                    <xsd:enumeration value="Management"/>
+                    <xsd:enumeration value="News"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="userNotificationPriority">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Error"/>
+                    <xsd:enumeration value="Alert"/>
+                    <xsd:enumeration value="None"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:complexType name="notifyUserEventPayload">
+                <xsd:sequence>
+                    <xsd:element name="notificationClass" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="notificationOrigin" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="notificationKind" type="userNotificationKind" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="notificationPriority" type="userNotificationPriority" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="notificationSubject" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="notificationContent" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="sourceDomain" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="sourceService" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="destinationUser" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="link" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="eventEmailFormat">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="HTML"/>
+                    <xsd:enumeration value="PLAIN_TEXT"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:complexType name="emailNotifyUserEventPayload">
+                <xsd:complexContent>
+                    <xsd:extension base="notifyUserEventPayload">
+                        <xsd:sequence>
+                            <xsd:element name="from" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                            </xsd:element>
+                            <!-- collection wrapper for sendTo -->
+                            <xsd:element name="sendTo" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="format" type="eventEmailFormat" minOccurs="0" maxOccurs="1"  readOnly="false">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="pushNotifyUserEventPayload">
+                <xsd:complexContent>
+                    <xsd:extension base="notifyUserEventPayload">
+                        <xsd:sequence>
+                            <xsd:element name="applicationId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="blobReference">
+                <xsd:sequence>
+                    <xsd:element name="domainName" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="serviceName" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="targetObjectId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="targetCopyId" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="basicErrorPayload">
+                <xsd:sequence>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorCode" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="fieldType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="BINARY"/>
+                    <xsd:enumeration value="BOOLEAN"/>
+                    <xsd:enumeration value="DATE"/>
+                    <xsd:enumeration value="DATETIME"/>
+                    <xsd:enumeration value="DOUBLE"/>
+                    <xsd:enumeration value="ENUM"/>
+                    <xsd:enumeration value="INTEGER"/>
+                    <xsd:enumeration value="MONEY"/>
+                    <xsd:enumeration value="STRING"/>
+                    <xsd:enumeration value="TIME"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="fileFormat">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CSV"/>
+                    <xsd:enumeration value="FLAT"/>
+                    <xsd:enumeration value="JSON"/>
+                    <xsd:enumeration value="XML"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="hookFunction">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="BEFORE_PARSE"/>
+                    <xsd:enumeration value="BEFORE_CONVERSION"/>
+                    <xsd:enumeration value="ON_ERROR"/>
+                    <xsd:enumeration value="VALIDATE"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="eventType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CHUNK"/>
+                    <xsd:enumeration value="DOWNLOAD"/>
+                    <xsd:enumeration value="ERROR"/>
+                    <xsd:enumeration value="FINISH"/>
+                    <xsd:enumeration value="START"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="errorStrategy">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CALL_SCRIPT"/>
+                    <xsd:enumeration value="IGNORE"/>
+                    <xsd:enumeration value="STOP"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="status">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="DONE"/>
+                    <xsd:enumeration value="DONE_WITH_ERRORS"/>
+                    <xsd:enumeration value="DOWNLOADING"/>
+                    <xsd:enumeration value="ERROR"/>
+                    <xsd:enumeration value="NOT_STARTED"/>
+                    <xsd:enumeration value="RUNNING"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="errorType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CONVERT_ERROR"/>
+                    <xsd:enumeration value="SERVICE_ERROR"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:complexType name="importError">
+                <xsd:sequence>
+                    <xsd:element name="errorType" type="errorType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="lineNumber" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="bean" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="message" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="exceptionClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="fielddto">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="fieldType" type="fieldType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="start" type="xsd:long" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="size" type="xsd:long" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="maskPattern" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="hookdto">
+                <xsd:sequence>
+                    <xsd:element name="hookFunction" type="hookFunction" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="script" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="layoutdto">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="fileFormat" type="fileFormat" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorStrategy" type="errorStrategy" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="delimiter" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="skipLines" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <!-- collection wrapper for fields -->
+                    <xsd:element name="fields" minOccurs="1" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="fielddto" minOccurs="1" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <!-- collection wrapper for hooks -->
+                    <xsd:element name="hooks" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="hookdto" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="importReport">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="startTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="endTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="beanClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="serviceClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="sucessCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorsCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="filteredCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="skippedCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <!-- collection wrapper for importErrors -->
+                    <xsd:element name="importErrors" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="importError" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="exportEventStatus">
+                <xsd:sequence>
+                    <xsd:element name="importerId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="eventType" type="eventType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="recordCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="importEventStatus">
+                <xsd:sequence>
+                    <xsd:element name="importerId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="eventType" type="eventType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="status" type="status" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorMessage" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="recordCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="importReport" type="importReport" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="exportConfig">
+                <xsd:sequence>
+                    <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="async" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorStrategy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="importConfig">
+                <xsd:sequence>
+                    <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="async" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="batchSize" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorStrategy" type="errorStrategy" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="dependency">
+                <xsd:sequence>
+                    <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="service" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="version" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="uuid">
+                <xsd:restriction base="xsd:string">
+                	<xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+                </xsd:restriction>
+             </xsd:simpleType>
+            
+            <!-- Message payload elements for signals -->
+            
+            <!-- Message input/output elements for commands -->
+            <xsd:element name="updateMergePatient">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="updatePrescription">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="deletePatient">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listDoctor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listDoctorOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="doctor" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateDoctor">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="createMergeResponsibleFamilyMember">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="updateMergeResponsibleFamilyMember">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="updateMergeDoctor">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="getPrescriptionsForDoctor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getPrescriptionsForDoctorOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for prescription -->
+                        <xsd:element name="prescription" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="prescription" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateResponsibleFamilyMember">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="deleteResponsibleFamilyMember">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="retrievePatient">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="retrieveResponsibleFamilyMember">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createPatient">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="listResponsibleFamilyMember">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listResponsibleFamilyMemberOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="responsibleFamilyMember" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="odata">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="importDoctor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importDoctorOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updatePatient">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="importResponsibleFamilyMember">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importResponsibleFamilyMemberOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportPatient">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportPatientOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listPrescription">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listPrescriptionOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="prescription" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createPrescription">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="getDoctorForSpeciality">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="speciality" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getDoctorForSpecialityOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for doctor -->
+                        <xsd:element name="doctor" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="doctor" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createDoctor">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="deletePrescription">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getMetadata">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="metadataFormat" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getMetadataOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="metadata" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="retrievePrescription">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="retrieveDoctor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importPrescription">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importPrescriptionOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkPrescription">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="prescription" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkPrescriptionOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="deleteDoctor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getDependencies">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="getDependenciesOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for dependencies -->
+                        <xsd:element name="dependencies" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="dependency" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkResponsibleFamilyMember">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="responsibleFamilyMember" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkResponsibleFamilyMemberOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateMergePrescription">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="listPatient">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listPatientOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="patient" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkDoctor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="doctor" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkDoctorOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createResponsibleFamilyMember">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="exportPrescription">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportPrescriptionOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createMergeDoctor">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="createMergePatient">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="exportResponsibleFamilyMember">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportResponsibleFamilyMemberOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkPatient">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="patient" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkPatientOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importPatient">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importPatientOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportDoctor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportDoctorOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="alterStatusPatient">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="alterStatusPatientOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="patient" type="patientResponse" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createMergePrescription">
+                <xsd:complexType/>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="updateMergePatientRequest">
+        <wsdl:part name="parameters" element="updateMergePatient"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergePatientResponse">
+        <wsdl:part name="result" element="updateMergePatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updatePrescriptionRequest">
+        <wsdl:part name="toUpdate" element="updatePrescription"/>
+    </wsdl:message>
+    <wsdl:message name="updatePrescriptionResponse">
+        <wsdl:part name="updated" element="updatePrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listDoctorRequest">
+        <wsdl:part name="pageRequest" element="listDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="listDoctorResponse">
+        <wsdl:part name="pagedResults" element="listDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateResponsibleFamilyMemberRequest">
+        <wsdl:part name="toUpdate" element="updateResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="updateResponsibleFamilyMemberResponse">
+        <wsdl:part name="updated" element="updateResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="importResponsibleFamilyMemberRequest">
+        <wsdl:part name="parameters" element="importResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="importResponsibleFamilyMemberResponse">
+        <wsdl:part name="result" element="importResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listPrescriptionRequest">
+        <wsdl:part name="pageRequest" element="listPrescription"/>
+    </wsdl:message>
+    <wsdl:message name="listPrescriptionResponse">
+        <wsdl:part name="pagedResults" element="listPrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createPrescriptionRequest">
+        <wsdl:part name="toCreate" element="createPrescription"/>
+    </wsdl:message>
+    <wsdl:message name="createPrescriptionResponse">
+        <wsdl:part name="created" element="createPrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createDoctorRequest">
+        <wsdl:part name="toCreate" element="createDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="createDoctorResponse">
+        <wsdl:part name="created" element="createDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="getMetadataRequest">
+        <wsdl:part name="parameters" element="getMetadata"/>
+    </wsdl:message>
+    <wsdl:message name="getMetadataResponse">
+        <wsdl:part name="result" element="getMetadataOutput"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveDoctorRequest">
+        <wsdl:part name="toRetrieve" element="retrieveDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveDoctorResponse">
+        <wsdl:part name="retrieved" element="retrieveDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="importPrescriptionRequest">
+        <wsdl:part name="parameters" element="importPrescription"/>
+    </wsdl:message>
+    <wsdl:message name="importPrescriptionResponse">
+        <wsdl:part name="result" element="importPrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkPrescriptionRequest">
+        <wsdl:part name="parameters" element="createBulkPrescription"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkPrescriptionResponse">
+        <wsdl:part name="result" element="createBulkPrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergePrescriptionRequest">
+        <wsdl:part name="parameters" element="updateMergePrescription"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergePrescriptionResponse">
+        <wsdl:part name="result" element="updateMergePrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkDoctorRequest">
+        <wsdl:part name="parameters" element="createBulkDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkDoctorResponse">
+        <wsdl:part name="result" element="createBulkDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkPatientRequest">
+        <wsdl:part name="parameters" element="createBulkPatient"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkPatientResponse">
+        <wsdl:part name="result" element="createBulkPatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="deletePatientRequest">
+        <wsdl:part name="toDelete" element="deletePatient"/>
+    </wsdl:message>
+    <wsdl:message name="updateDoctorRequest">
+        <wsdl:part name="toUpdate" element="updateDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="updateDoctorResponse">
+        <wsdl:part name="updated" element="updateDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeResponsibleFamilyMemberRequest">
+        <wsdl:part name="parameters" element="createMergeResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeResponsibleFamilyMemberResponse">
+        <wsdl:part name="result" element="createMergeResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeResponsibleFamilyMemberRequest">
+        <wsdl:part name="parameters" element="updateMergeResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeResponsibleFamilyMemberResponse">
+        <wsdl:part name="result" element="updateMergeResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeDoctorRequest">
+        <wsdl:part name="parameters" element="updateMergeDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeDoctorResponse">
+        <wsdl:part name="result" element="updateMergeDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="getPrescriptionsForDoctorRequest">
+        <wsdl:part name="parameters" element="getPrescriptionsForDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="getPrescriptionsForDoctorResponse">
+        <wsdl:part name="result" element="getPrescriptionsForDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="deleteResponsibleFamilyMemberRequest">
+        <wsdl:part name="toDelete" element="deleteResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="retrievePatientRequest">
+        <wsdl:part name="toRetrieve" element="retrievePatient"/>
+    </wsdl:message>
+    <wsdl:message name="retrievePatientResponse">
+        <wsdl:part name="retrieved" element="retrievePatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveResponsibleFamilyMemberRequest">
+        <wsdl:part name="toRetrieve" element="retrieveResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveResponsibleFamilyMemberResponse">
+        <wsdl:part name="retrieved" element="retrieveResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createPatientRequest">
+        <wsdl:part name="toCreate" element="createPatient"/>
+    </wsdl:message>
+    <wsdl:message name="createPatientResponse">
+        <wsdl:part name="created" element="createPatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listResponsibleFamilyMemberRequest">
+        <wsdl:part name="pageRequest" element="listResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="listResponsibleFamilyMemberResponse">
+        <wsdl:part name="pagedResults" element="listResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="odataRequest">
+        <wsdl:part name="parameters" element="odata"/>
+    </wsdl:message>
+    <wsdl:message name="odataResponse">
+        <wsdl:part name="result" element="odataOutput"/>
+    </wsdl:message>
+    <wsdl:message name="importDoctorRequest">
+        <wsdl:part name="parameters" element="importDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="importDoctorResponse">
+        <wsdl:part name="result" element="importDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updatePatientRequest">
+        <wsdl:part name="toUpdate" element="updatePatient"/>
+    </wsdl:message>
+    <wsdl:message name="updatePatientResponse">
+        <wsdl:part name="updated" element="updatePatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportPatientRequest">
+        <wsdl:part name="parameters" element="exportPatient"/>
+    </wsdl:message>
+    <wsdl:message name="exportPatientResponse">
+        <wsdl:part name="result" element="exportPatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="getDoctorForSpecialityRequest">
+        <wsdl:part name="parameters" element="getDoctorForSpeciality"/>
+    </wsdl:message>
+    <wsdl:message name="getDoctorForSpecialityResponse">
+        <wsdl:part name="result" element="getDoctorForSpecialityOutput"/>
+    </wsdl:message>
+    <wsdl:message name="deletePrescriptionRequest">
+        <wsdl:part name="toDelete" element="deletePrescription"/>
+    </wsdl:message>
+    <wsdl:message name="retrievePrescriptionRequest">
+        <wsdl:part name="toRetrieve" element="retrievePrescription"/>
+    </wsdl:message>
+    <wsdl:message name="retrievePrescriptionResponse">
+        <wsdl:part name="retrieved" element="retrievePrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="deleteDoctorRequest">
+        <wsdl:part name="toDelete" element="deleteDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="getDependenciesRequest">
+        <wsdl:part name="parameters" element="getDependencies"/>
+    </wsdl:message>
+    <wsdl:message name="getDependenciesResponse">
+        <wsdl:part name="result" element="getDependenciesOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkResponsibleFamilyMemberRequest">
+        <wsdl:part name="parameters" element="createBulkResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkResponsibleFamilyMemberResponse">
+        <wsdl:part name="result" element="createBulkResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listPatientRequest">
+        <wsdl:part name="pageRequest" element="listPatient"/>
+    </wsdl:message>
+    <wsdl:message name="listPatientResponse">
+        <wsdl:part name="pagedResults" element="listPatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createResponsibleFamilyMemberRequest">
+        <wsdl:part name="toCreate" element="createResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="createResponsibleFamilyMemberResponse">
+        <wsdl:part name="created" element="createResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportPrescriptionRequest">
+        <wsdl:part name="parameters" element="exportPrescription"/>
+    </wsdl:message>
+    <wsdl:message name="exportPrescriptionResponse">
+        <wsdl:part name="result" element="exportPrescriptionOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeDoctorRequest">
+        <wsdl:part name="parameters" element="createMergeDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeDoctorResponse">
+        <wsdl:part name="result" element="createMergeDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergePatientRequest">
+        <wsdl:part name="parameters" element="createMergePatient"/>
+    </wsdl:message>
+    <wsdl:message name="createMergePatientResponse">
+        <wsdl:part name="result" element="createMergePatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportResponsibleFamilyMemberRequest">
+        <wsdl:part name="parameters" element="exportResponsibleFamilyMember"/>
+    </wsdl:message>
+    <wsdl:message name="exportResponsibleFamilyMemberResponse">
+        <wsdl:part name="result" element="exportResponsibleFamilyMemberOutput"/>
+    </wsdl:message>
+    <wsdl:message name="importPatientRequest">
+        <wsdl:part name="parameters" element="importPatient"/>
+    </wsdl:message>
+    <wsdl:message name="importPatientResponse">
+        <wsdl:part name="result" element="importPatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportDoctorRequest">
+        <wsdl:part name="parameters" element="exportDoctor"/>
+    </wsdl:message>
+    <wsdl:message name="exportDoctorResponse">
+        <wsdl:part name="result" element="exportDoctorOutput"/>
+    </wsdl:message>
+    <wsdl:message name="alterStatusPatientRequest">
+        <wsdl:part name="parameters" element="alterStatusPatient"/>
+    </wsdl:message>
+    <wsdl:message name="alterStatusPatientResponse">
+        <wsdl:part name="result" element="alterStatusPatientOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergePrescriptionRequest">
+        <wsdl:part name="parameters" element="createMergePrescription"/>
+    </wsdl:message>
+    <wsdl:message name="createMergePrescriptionResponse">
+        <wsdl:part name="result" element="createMergePrescriptionOutput"/>
+    </wsdl:message>
+    
+    <wsdl:portType name="godev2022desafioPortType">
+        <wsdl:operation name="updateMergePatient">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergePatientRequest"/>
+            <wsdl:output message="updateMergePatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updatePrescription">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updatePrescriptionRequest"/>
+            <wsdl:output message="updatePrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listDoctor">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listDoctorRequest"/>
+            <wsdl:output message="listDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateResponsibleFamilyMember">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="updateResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importResponsibleFamilyMember">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="importResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="importResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listPrescription">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listPrescriptionRequest"/>
+            <wsdl:output message="listPrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createPrescription">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createPrescriptionRequest"/>
+            <wsdl:output message="createPrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createDoctor">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createDoctorRequest"/>
+            <wsdl:output message="createDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getMetadata">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested. 
+            </wsdl:documentation>
+            <wsdl:input message="getMetadataRequest"/>
+            <wsdl:output message="getMetadataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveDoctor">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrieveDoctorRequest"/>
+            <wsdl:output message="retrieveDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importPrescription">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="importPrescriptionRequest"/>
+            <wsdl:output message="importPrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkPrescription">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkPrescriptionRequest"/>
+            <wsdl:output message="createBulkPrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergePrescription">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergePrescriptionRequest"/>
+            <wsdl:output message="updateMergePrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkDoctor">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkDoctorRequest"/>
+            <wsdl:output message="createBulkDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkPatient">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkPatientRequest"/>
+            <wsdl:output message="createBulkPatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deletePatient">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deletePatientRequest"/>
+            <wsdl:output message="deletePatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateDoctor">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateDoctorRequest"/>
+            <wsdl:output message="updateDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeResponsibleFamilyMember">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergeResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="createMergeResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeResponsibleFamilyMember">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergeResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="updateMergeResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeDoctor">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergeDoctorRequest"/>
+            <wsdl:output message="updateMergeDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPrescriptionsForDoctor">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            Responsável por obter prescrições por nome do médico 
+            </wsdl:documentation>
+            <wsdl:input message="getPrescriptionsForDoctorRequest"/>
+            <wsdl:output message="getPrescriptionsForDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteResponsibleFamilyMember">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deleteResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="deleteResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrievePatient">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrievePatientRequest"/>
+            <wsdl:output message="retrievePatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveResponsibleFamilyMember">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrieveResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="retrieveResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createPatient">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createPatientRequest"/>
+            <wsdl:output message="createPatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listResponsibleFamilyMember">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="listResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="odata">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="odataRequest"/>
+            <wsdl:output message="odataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importDoctor">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="importDoctorRequest"/>
+            <wsdl:output message="importDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updatePatient">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updatePatientRequest"/>
+            <wsdl:output message="updatePatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportPatient">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportPatientRequest"/>
+            <wsdl:output message="exportPatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDoctorForSpeciality">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            Responsável por obter Médicos por especialidade 
+            </wsdl:documentation>
+            <wsdl:input message="getDoctorForSpecialityRequest"/>
+            <wsdl:output message="getDoctorForSpecialityResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deletePrescription">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deletePrescriptionRequest"/>
+            <wsdl:output message="deletePrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrievePrescription">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrievePrescriptionRequest"/>
+            <wsdl:output message="retrievePrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteDoctor">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deleteDoctorRequest"/>
+            <wsdl:output message="deleteDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDependencies">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            Returns a list with all dependencies from this service, along with their respective versions 
+            </wsdl:documentation>
+            <wsdl:input message="getDependenciesRequest"/>
+            <wsdl:output message="getDependenciesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkResponsibleFamilyMember">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="createBulkResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listPatient">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listPatientRequest"/>
+            <wsdl:output message="listPatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createResponsibleFamilyMember">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the ResponsibleFamilyMember entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="createResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportPrescription">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportPrescriptionRequest"/>
+            <wsdl:output message="exportPrescriptionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeDoctor">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the Doctor entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergeDoctorRequest"/>
+            <wsdl:output message="createMergeDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergePatient">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the Patient entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergePatientRequest"/>
+            <wsdl:output message="createMergePatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportResponsibleFamilyMember">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportResponsibleFamilyMemberRequest"/>
+            <wsdl:output message="exportResponsibleFamilyMemberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importPatient">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="importPatientRequest"/>
+            <wsdl:output message="importPatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportDoctor">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportDoctorRequest"/>
+            <wsdl:output message="exportDoctorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="alterStatusPatient">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            Responsável por alterar status do paciente para ativo 
+            </wsdl:documentation>
+            <wsdl:input message="alterStatusPatientRequest"/>
+            <wsdl:output message="alterStatusPatientResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergePrescription">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the Prescription entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergePrescriptionRequest"/>
+            <wsdl:output message="createMergePrescriptionResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:binding name="godev2022desafioSoapBinding" type="godev2022desafioPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="updateMergePatient">
+            <soap:operation soapAction="updateMergePatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updatePrescription">
+            <soap:operation soapAction="updatePrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listDoctor">
+            <soap:operation soapAction="listDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateResponsibleFamilyMember">
+            <soap:operation soapAction="updateResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importResponsibleFamilyMember">
+            <soap:operation soapAction="importResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listPrescription">
+            <soap:operation soapAction="listPrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createPrescription">
+            <soap:operation soapAction="createPrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createDoctor">
+            <soap:operation soapAction="createDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMetadata">
+            <soap:operation soapAction="getMetadata"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveDoctor">
+            <soap:operation soapAction="retrieveDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importPrescription">
+            <soap:operation soapAction="importPrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkPrescription">
+            <soap:operation soapAction="createBulkPrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergePrescription">
+            <soap:operation soapAction="updateMergePrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkDoctor">
+            <soap:operation soapAction="createBulkDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkPatient">
+            <soap:operation soapAction="createBulkPatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deletePatient">
+            <soap:operation soapAction="deletePatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateDoctor">
+            <soap:operation soapAction="updateDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeResponsibleFamilyMember">
+            <soap:operation soapAction="createMergeResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeResponsibleFamilyMember">
+            <soap:operation soapAction="updateMergeResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeDoctor">
+            <soap:operation soapAction="updateMergeDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPrescriptionsForDoctor">
+            <soap:operation soapAction="getPrescriptionsForDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteResponsibleFamilyMember">
+            <soap:operation soapAction="deleteResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retrievePatient">
+            <soap:operation soapAction="retrievePatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveResponsibleFamilyMember">
+            <soap:operation soapAction="retrieveResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createPatient">
+            <soap:operation soapAction="createPatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listResponsibleFamilyMember">
+            <soap:operation soapAction="listResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="odata">
+            <soap:operation soapAction="odata"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importDoctor">
+            <soap:operation soapAction="importDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updatePatient">
+            <soap:operation soapAction="updatePatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportPatient">
+            <soap:operation soapAction="exportPatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getDoctorForSpeciality">
+            <soap:operation soapAction="getDoctorForSpeciality"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deletePrescription">
+            <soap:operation soapAction="deletePrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retrievePrescription">
+            <soap:operation soapAction="retrievePrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteDoctor">
+            <soap:operation soapAction="deleteDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getDependencies">
+            <soap:operation soapAction="getDependencies"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkResponsibleFamilyMember">
+            <soap:operation soapAction="createBulkResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listPatient">
+            <soap:operation soapAction="listPatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createResponsibleFamilyMember">
+            <soap:operation soapAction="createResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportPrescription">
+            <soap:operation soapAction="exportPrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeDoctor">
+            <soap:operation soapAction="createMergeDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergePatient">
+            <soap:operation soapAction="createMergePatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportResponsibleFamilyMember">
+            <soap:operation soapAction="exportResponsibleFamilyMember"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importPatient">
+            <soap:operation soapAction="importPatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportDoctor">
+            <soap:operation soapAction="exportDoctor"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="alterStatusPatient">
+            <soap:operation soapAction="alterStatusPatient"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergePrescription">
+            <soap:operation soapAction="createMergePrescription"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name="godev2022desafio">
+        <wsdl:documentation>
+        </wsdl:documentation>
+        <wsdl:port name="godev2022desafioPort" binding="godev2022desafioSoapBinding">
+            <soap:address location="${serviceURI}"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

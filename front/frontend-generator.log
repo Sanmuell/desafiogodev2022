@@ -1,0 +1,97 @@
+2022-10-21T17:50:38.817Z - INFO: No previously generated project detected.
+2022-10-21T17:50:38.946Z - ERROR: You need to specify one command
+
+2022-10-21T17:50:49.582Z - INFO: No previously generated project detected.
+2022-10-21T17:50:49.616Z - DEBUG: Loading possible input files at "C:\git\godev2022desafio\front"
+2022-10-21T17:51:04.793Z - VERBOSE: Loading input file...
+2022-10-21T17:51:10.596Z - VERBOSE: Parsing input file...
+2022-10-21T17:51:10.597Z - ERROR: Invalid input file
+2022-10-21T17:51:10.598Z - DEBUG: Error: Invalid input file
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:27729)
+    at tryCatch (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:65:40)
+    at Generator.invoke [as _invoke] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:303:22)
+    at Generator.prototype.<computed> [as next] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:117:21)
+    at r (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23522)
+    at C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23661
+    at new Promise (<anonymous>)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23459)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:28219)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:24259)
+2022-10-21T17:51:10.598Z - ERROR: Generation error! :(
+
+2022-10-21T17:52:02.996Z - INFO: No previously generated project detected.
+2022-10-21T17:52:03.033Z - DEBUG: Loading possible input files at "C:\git\godev2022desafio\front"
+2022-10-21T17:52:05.594Z - VERBOSE: Loading input file...
+2022-10-21T17:52:47.703Z - VERBOSE: Parsing input file...
+2022-10-21T17:52:47.704Z - ERROR: Invalid input file
+2022-10-21T17:52:47.704Z - DEBUG: Error: Invalid input file
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:27729)
+    at tryCatch (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:65:40)
+    at Generator.invoke [as _invoke] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:303:22)
+    at Generator.prototype.<computed> [as next] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:117:21)
+    at r (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23522)
+    at C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23661
+    at new Promise (<anonymous>)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23459)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:28219)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:24259)
+2022-10-21T17:52:47.704Z - ERROR: Generation error! :(
+
+2022-10-21T17:53:02.980Z - INFO: No previously generated project detected.
+2022-10-21T17:53:03.017Z - DEBUG: Loading possible input files at "C:\git\godev2022desafio\front"
+2022-10-21T17:53:04.066Z - VERBOSE: Loading input file...
+2022-10-21T17:53:07.119Z - VERBOSE: Parsing input file...
+2022-10-21T17:53:07.120Z - ERROR: Invalid input file
+2022-10-21T17:53:07.121Z - DEBUG: Error: Invalid input file
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:27729)
+    at tryCatch (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:65:40)
+    at Generator.invoke [as _invoke] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:303:22)
+    at Generator.prototype.<computed> [as next] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:117:21)
+    at r (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23522)
+    at C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23661
+    at new Promise (<anonymous>)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23459)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:28219)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:24259)
+2022-10-21T17:53:07.121Z - ERROR: Generation error! :(
+
+2022-10-21T17:54:17.034Z - INFO: No previously generated project detected.
+2022-10-21T17:54:17.065Z - ERROR: You need to specify one command
+
+2022-10-21T17:54:23.493Z - INFO: No previously generated project detected.
+2022-10-21T17:54:23.528Z - DEBUG: Loading possible input files at "C:\git\godev2022desafio\front"
+2022-10-21T17:55:13.413Z - VERBOSE: Loading input file...
+2022-10-21T17:55:43.773Z - VERBOSE: Parsing input file...
+2022-10-21T17:55:43.774Z - ERROR: Invalid input file
+2022-10-21T17:55:43.775Z - DEBUG: Error: Invalid input file
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:27729)
+    at tryCatch (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:65:40)
+    at Generator.invoke [as _invoke] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:303:22)
+    at Generator.prototype.<computed> [as next] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:117:21)
+    at r (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23522)
+    at C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23661
+    at new Promise (<anonymous>)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23459)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:28219)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:24259)
+2022-10-21T17:55:43.775Z - ERROR: Generation error! :(
+
+2022-10-21T17:56:59.819Z - INFO: No previously generated project detected.
+2022-10-21T17:56:59.856Z - DEBUG: Loading possible input files at "C:\git\godev2022desafio\front"
+2022-10-21T17:57:07.489Z - VERBOSE: Loading input file...
+2022-10-21T17:57:19.861Z - VERBOSE: Parsing input file...
+2022-10-21T17:57:19.865Z - INFO: Using EDL version 31.0.0
+2022-10-21T17:57:19.868Z - VERBOSE: Saving input file...
+2022-10-21T17:57:19.869Z - DEBUG: Writing input file at "C:\git\godev2022desafio\front\frontend-generator.ed.json"
+2022-10-21T17:57:19.874Z - VERBOSE: Generating project data...
+2022-10-21T17:57:19.885Z - VERBOSE: Writing generation metadata...
+2022-10-21T17:57:19.886Z - DEBUG: Writing generation metadata file at "C:\git\godev2022desafio\front\frontend-generator.meta.json"
+2022-10-21T17:57:19.895Z - VERBOSE: Generating files...
+2022-10-21T17:57:21.254Z - VERBOSE: Extracting translation keys...
+2022-10-21T17:57:51.637Z - DEBUG: Extracting translation keys from "C:\git\godev2022desafio\front\src" to "C:\git\godev2022desafio\front\src\locale\pt-BR.json"
+2022-10-21T17:57:58.041Z - DEBUG: Reading translation file at "C:\git\godev2022desafio\front\src\locale\pt-BR.json"
+2022-10-21T17:57:58.043Z - DEBUG: [object Object]
+2022-10-21T17:57:58.043Z - DEBUG: Rewriting translation file at "C:\git\godev2022desafio\front\src\locale\pt-BR.json" with nulls instead of empty strings
+2022-10-21T17:57:58.045Z - VERBOSE: Generated 72 files. Ignored 0 files.
+2022-10-21T17:58:15.509Z - SUCCESS: Successfully generated! :)
+

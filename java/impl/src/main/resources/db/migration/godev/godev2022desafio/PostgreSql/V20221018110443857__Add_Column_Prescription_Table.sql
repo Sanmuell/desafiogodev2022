@@ -1,0 +1,1 @@
+alter table prescription add column statement_of_reponsability BOOLEAN /* statementOfReponsability */;

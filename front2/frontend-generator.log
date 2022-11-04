@@ -1,0 +1,18 @@
+2022-10-21T18:41:19.169Z - INFO: No previously generated project detected.
+2022-10-21T18:41:19.309Z - DEBUG: Loading possible input files at "C:\git\godev2022desafio\front2"
+2022-10-21T18:41:20.787Z - VERBOSE: Loading input file...
+2022-10-21T18:44:37.443Z - VERBOSE: Parsing input file...
+2022-10-21T18:44:37.445Z - ERROR: Invalid input file
+2022-10-21T18:44:37.447Z - DEBUG: Error: Invalid input file
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:27729)
+    at tryCatch (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:65:40)
+    at Generator.invoke [as _invoke] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:303:22)
+    at Generator.prototype.<computed> [as next] (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\node_modules\regenerator-runtime\runtime.js:117:21)
+    at r (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23522)
+    at C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23661
+    at new Promise (<anonymous>)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:23459)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:28219)
+    at e.<anonymous> (C:\Users\Sanmuell.Sousa\AppData\Roaming\npm\node_modules\@seniorsistemas\frontend-generator\bin\main.js:2:24259)
+2022-10-21T18:44:37.447Z - ERROR: Generation error! :(
+

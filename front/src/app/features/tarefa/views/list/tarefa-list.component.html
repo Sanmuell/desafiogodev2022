@@ -1,0 +1,107 @@
+<div *ngIf="!customTemplate else customTemplate">
+    <p-confirmDialog [acceptLabel]="'godev.godev20222.yes' | translate" acceptIcon="" [rejectLabel]="'godev.godev20222.no' | translate"
+        rejectIcon=""></p-confirmDialog>
+    <form [formGroup]="filterFormGroup" autocomplete="off">
+        <p-panel styleClass="form-group" [toggleable]="true" [(collapsed)]="filtersPanelCollapsed" (onAfterToggle)="focusInput('id')">
+            <p-header>
+                {{"godev.godev20222.filters" | translate}}
+                <s-token-list [tokens]="searchTokens" (tokenRemoved)="onRemoveToken($event)" [removableTokens]="true"></s-token-list>
+            </p-header>
+            <div *ngIf="!customFilterFields else customFilterFields">
+                <s-dynamic-form [fields]="filterFields" [form]="filterFormGroup" [errorMessages]="{pattern: 'godev.godev20222.error_invalid' | translate}"></s-dynamic-form>
+            </div>
+            <p-footer>
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <button id="filter-button" class="ui-button" type="submit" pButton [label]="'godev.godev20222.filter' | translate"
+                            title="{{'godev.godev20222.filter' | translate}} (Alt + Shift + F)" (click)="onSearch()"></button>
+                        <button id="clear-button" class="ui-button ui-button-link" type="button" pButton [label]="'godev.godev20222.clear' | translate"
+                            title="{{'godev.godev20222.clear' | translate}} (Alt + Shift + L)" (click)="onClear()"></button>
+                    </div>
+                </div>
+            </p-footer>
+        </p-panel>
+    </form>
+    <p-panel *sLoadingState="showLoader">
+        <p-header>
+            {{"godev.godev20222.tarefa_list_grid_title" | translate}}
+        </p-header>
+        <s-empty-state *ngIf="serverError" iconClass="fa fa-exclamation-triangle" title="{{'godev.godev20222.error_server_title' | translate}}"
+            primaryActionLabel="{{'godev.godev20222.error_server_try_again' | translate}}" (primaryAction)="resetGrid()"
+            description="{{'godev.godev20222.error_server_description' | translate}}"></s-empty-state>
+        <s-empty-state *ngIf="gridData && !gridData.length" [title]="'godev.godev20222.tarefa_empty_state_title' | translate"
+            [showPrimaryAction]="permissions.incluir" [primaryActionLabel]="'godev.godev20222.add' | translate"
+            (primaryAction)="onAdd()" [description]="'godev.godev20222.tarefa_empty_state_description' | translate"></s-empty-state>
+        <div [attr.data-hidden]="!gridData?.length || serverError">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <button id="add-button" type="button" pButton [label]="'godev.godev20222.add' | translate" title="{{'godev.godev20222.add' | translate}} (Alt + Shift + N)"
+                        *ngIf="permissions.incluir" (click)="onAdd()"></button>
+                    <button id="edit-button" type="button" class="ui-button-secondary" pButton [label]="'godev.godev20222.edit' | translate"
+                        title="{{'godev.godev20222.edit' | translate}} (Alt + Shift + E)" [disabled]="!selection || selection.length !== 1"
+                        (click)="onEdit()"></button>
+                    <button id="delete-button" type="button" class="ui-button-secondary" pButton [label]="'godev.godev20222.delete' | translate"
+                        title="{{'godev.godev20222.delete' | translate}} (Alt + Shift + X)" (click)="onDelete()"
+                        [disabled]="!selection || !selection.length" *ngIf="permissions.excluir"></button>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p-table #tarefaTable [value]="gridData" [columns]="gridColumns" dataKey="id" [lazy]="true" [scrollable]="true"
+                        [resizableColumns]="true" sortMode="multiple" [paginator]="true" [totalRecords]="totalRecords"
+                        [sortField]="getSortField()" [sortOrder]="getSortOrder()" [first]="getRowIndex()"
+                        [rows]="getPageSize()" [lazyLoadOnInit]="false" [rowsPerPageOptions]="[10, 20, 50, 100]"
+                        [(selection)]="selection" (onLazyLoad)="onGridChange($event)">
+                        <ng-template pTemplate="colgroup" let-columns *ngIf="!customGridColgroup else customGridColgroup">
+                            <colgroup>
+                                <col *ngFor="let col of columns" [style.width]="col.width">
+                                <!--{CA:GRID_COLGROUP_COLUMNS:START}-->
+                                <!--{CA:GRID_COLGROUP_COLUMNS:END}-->
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns *ngIf="!customGridHeader else customGridHeader">
+                            <tr>
+                                <th style="width: 50px">
+                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
+                                <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="width: 200px" pResizableColumn>
+                                    <div class="senior-header">
+                                        <span class="senior-header-title">{{col.header}}</span>
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <!--{CA:GRID_HEADER_COLUMNS:START}-->
+                                <!--{CA:GRID_HEADER_COLUMNS:END}-->
+                            </tr>
+                        </ng-template>
+                        <!--{CA:GRID_HEADER:START}-->
+                        <!--{CA:GRID_HEADER:END}-->
+                        <ng-template pTemplate="body" let-rowData let-columns *ngIf="!customGridBody else customGridBody">
+                            <tr [pSelectableRow]="rowData">
+                                <td style="width: 50px">
+                                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                                </td>
+                                <td (click)="selection = [rowData]" style="width: 200px">
+                                    <span>{{getProp(rowData, 'id')  || ('godev.godev20222.list_grid_empty_field' | translate)}}</span>
+                                </td>
+                                <td (click)="selection = [rowData]" style="width: 200px">
+                                    <span>{{getProp(rowData, 'descricao')  || ('godev.godev20222.list_grid_empty_field' | translate)}}</span>
+                                </td>
+                                <!--{CA:GRID_BODY_COLUMNS:START}-->
+                                <!--{CA:GRID_BODY_COLUMNS:END}-->
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <s-table-paging [table]="tarefaTable" [totalRecords]="totalRecords" [exportFileName]="'godev.godev20222.tarefa_list_grid_title' | translate">
+                            </s-table-paging>
+                        </ng-template>
+                        <!--{CA:GRID_TEMPLATES:START}-->
+                        <!--{CA:GRID_TEMPLATES:END}-->
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+</div>
+<!--{CA:FILE_CONTENTS:START}-->
+<!--{CA:FILE_CONTENTS:END}-->

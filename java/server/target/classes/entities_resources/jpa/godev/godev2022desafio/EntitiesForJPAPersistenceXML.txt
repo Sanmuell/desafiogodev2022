@@ -1,0 +1,9 @@
+<!-- GENERATED ENTITIES: 2022-10-19 08:58:13:826 -->
+<class>br.com.senior.godev.godev2022desafio.PatientEntity</class>
+<class>br.com.senior.godev.godev2022desafio.Patient_ResponsibleDoctorsEntity</class>
+<class>br.com.senior.godev.godev2022desafio.Patient_ResponsibleFamilyMembersEntity</class>
+<class>br.com.senior.godev.godev2022desafio.Patient_PrescriptionsEntity</class>
+<class>br.com.senior.godev.godev2022desafio.DoctorEntity</class>
+<class>br.com.senior.godev.godev2022desafio.Doctor_PrescriptionsEntity</class>
+<class>br.com.senior.godev.godev2022desafio.PrescriptionEntity</class>
+<class>br.com.senior.godev.godev2022desafio.ResponsibleFamilyMemberEntity</class>

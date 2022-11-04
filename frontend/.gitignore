@@ -1,0 +1,13 @@
+debug.log
+.tmp/
+.idea/
+.vscode/
+node_modules/
+dist/
+coverage/
+terminal.glue
+.project
+input.json
+
+/*{CA:FILE_CONTENTS:START}*/
+/*{CA:FILE_CONTENTS:END}*/

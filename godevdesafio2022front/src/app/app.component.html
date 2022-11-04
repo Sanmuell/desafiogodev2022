@@ -1,0 +1,13 @@
+<s-loading-state [loading]="pageLoading" [blockWindow]="true">
+    <div class="sds-container" *ngIf="!customTemplate else customTemplate">
+        <s-product-header header="{{'godev.godev2022desafio.product_header_title' | translate}}">
+            <!--{CA:PRODUCT_HEADER_CONTENTS:START}-->
+            <!--{CA:PRODUCT_HEADER_CONTENTS:END}-->
+        </s-product-header>
+        <p-toast></p-toast>
+        <s-breadcrumb></s-breadcrumb>
+        <router-outlet></router-outlet>
+    </div>
+</s-loading-state>
+<!--{CA:FILE_CONTENTS:START}-->
+<!--{CA:FILE_CONTENTS:END}-->

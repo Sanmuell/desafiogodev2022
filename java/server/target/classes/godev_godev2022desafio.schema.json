@@ -1,0 +1,585 @@
+{
+    "id": "godev.godev2022desafio",
+    "properties": {
+        "patientResponse" : {
+        	"type" : "object",
+        	"id" : "patientResponse",
+        	"properties" : {
+            	"name" : {
+            		"type": "string"
+            	},
+            	"isAtivo" : {
+            		"type": "boolean"
+            	}
+        	},
+        	"required" : ["name","isAtivo"]
+        }
+        ,
+        "patient" : {
+        	"type" : "object",
+        	"id" : "patient",
+        	"properties" : {
+            	"id" : {
+            		"type": "string",
+            		"format": "uuid"
+            	},
+            	"name" : {
+            		"type": "string"
+            	},
+            	"cpf" : {
+            		"type": "string"
+            	},
+            	"address" : {
+            		"type": "string"
+            	},
+            	"phone" : {
+            		"type": "integer"
+            	},
+            	"responsibleDoctors" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/doctor"
+            		}
+            	},
+            	"responsibleFamilyMembers" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/responsibleFamilyMember"
+            		}
+            	},
+            	"prescriptions" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/prescription"
+            		}
+            	},
+            	"isAtivo" : {
+            		"type": "boolean",
+            		"default": false
+            	}
+        	},
+        	"required" : ["name","address","phone"]
+        }
+        ,
+        "doctor" : {
+        	"type" : "object",
+        	"id" : "doctor",
+        	"properties" : {
+            	"id" : {
+            		"type": "string",
+            		"format": "uuid"
+            	},
+            	"name" : {
+            		"type": "string"
+            	},
+            	"cpf" : {
+            		"type": "string"
+            	},
+            	"crmNumber" : {
+            		"type": "integer"
+            	},
+            	"crmState" : {
+            		"type": "string"
+            	},
+            	"especiality" : {
+            		"type": "string"
+            	},
+            	"prescriptions" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/prescription"
+            		}
+            	}
+        	},
+        	"required" : ["name","cpf","crmNumber","crmState","especiality"]
+        }
+        ,
+        "prescription" : {
+        	"type" : "object",
+        	"id" : "prescription",
+        	"properties" : {
+            	"id" : {
+            		"type": "string",
+            		"format": "uuid"
+            	},
+            	"drug" : {
+            		"type": "string"
+            	},
+            	"description" : {
+            		"type": "string"
+            	},
+            	"data" : {
+            		"type": "string",
+            		"format": "date"
+            	},
+            	"doctorResponsible" : {
+            		"$ref": "#/properties/doctor"
+            	},
+            	"type" : {
+            		"type": "string",
+            		"enum": ["YELLOW","BLUE","WHITE"]
+            	},
+            	"statementOfReponsability" : {
+            		"type": "boolean",
+            		"default": false
+            	},
+            	"patient" : {
+            		"$ref": "#/properties/patient"
+            	}
+        	},
+        	"required" : ["drug","description","data","type"]
+        }
+        ,
+        "responsibleFamilyMember" : {
+        	"type" : "object",
+        	"id" : "responsibleFamilyMember",
+        	"properties" : {
+            	"id" : {
+            		"type": "string",
+            		"format": "uuid"
+            	},
+            	"name" : {
+            		"type": "string"
+            	},
+            	"cpf" : {
+            		"type": "string"
+            	},
+            	"kinship" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["name","cpf"]
+        }
+        ,
+        "notifyUserEventPayload" : {
+        	"type" : "object",
+        	"id" : "notifyUserEventPayload",
+        	"properties" : {
+            	"notificationClass" : {
+            		"type": "string"
+            	},
+            	"notificationOrigin" : {
+            		"type": "string"
+            	},
+            	"notificationKind" : {
+            		"type": "string",
+            		"enum": ["Operational","Management","News"]
+            	},
+            	"notificationPriority" : {
+            		"type": "string",
+            		"enum": ["Error","Alert","None"]
+            	},
+            	"notificationSubject" : {
+            		"type": "string"
+            	},
+            	"notificationContent" : {
+            		"type": "string"
+            	},
+            	"sourceDomain" : {
+            		"type": "string"
+            	},
+            	"sourceService" : {
+            		"type": "string"
+            	},
+            	"destinationUser" : {
+            		"type": "string"
+            	},
+            	"link" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["notificationKind","notificationPriority","notificationSubject","notificationContent","sourceDomain","sourceService","destinationUser"]
+        }
+        ,
+        "emailNotifyUserEventPayload" : {
+        	"type" : "object",
+        	"id" : "emailNotifyUserEventPayload",
+        	"properties" : {
+            	"notificationClass" : {
+            		"type": "string"
+            	},
+            	"notificationOrigin" : {
+            		"type": "string"
+            	},
+            	"notificationKind" : {
+            		"type": "string",
+            		"enum": ["Operational","Management","News"]
+            	},
+            	"notificationPriority" : {
+            		"type": "string",
+            		"enum": ["Error","Alert","None"]
+            	},
+            	"notificationSubject" : {
+            		"type": "string"
+            	},
+            	"notificationContent" : {
+            		"type": "string"
+            	},
+            	"sourceDomain" : {
+            		"type": "string"
+            	},
+            	"sourceService" : {
+            		"type": "string"
+            	},
+            	"destinationUser" : {
+            		"type": "string"
+            	},
+            	"link" : {
+            		"type": "string"
+            	},
+            	"from" : {
+            		"type": "string"
+            	},
+            	"sendTo" : {
+            		"type": "array",
+            		"items": {
+            		  "type": "string"
+            		}
+            	},
+            	"format" : {
+            		"type": "string",
+            		"enum": ["HTML","PLAIN_TEXT"]
+            	}
+        	},
+        	"required" : ["notificationKind","notificationPriority","notificationSubject","notificationContent","sourceDomain","sourceService","destinationUser","from"]
+        }
+        ,
+        "pushNotifyUserEventPayload" : {
+        	"type" : "object",
+        	"id" : "pushNotifyUserEventPayload",
+        	"properties" : {
+            	"notificationClass" : {
+            		"type": "string"
+            	},
+            	"notificationOrigin" : {
+            		"type": "string"
+            	},
+            	"notificationKind" : {
+            		"type": "string",
+            		"enum": ["Operational","Management","News"]
+            	},
+            	"notificationPriority" : {
+            		"type": "string",
+            		"enum": ["Error","Alert","None"]
+            	},
+            	"notificationSubject" : {
+            		"type": "string"
+            	},
+            	"notificationContent" : {
+            		"type": "string"
+            	},
+            	"sourceDomain" : {
+            		"type": "string"
+            	},
+            	"sourceService" : {
+            		"type": "string"
+            	},
+            	"destinationUser" : {
+            		"type": "string"
+            	},
+            	"link" : {
+            		"type": "string"
+            	},
+            	"applicationId" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["notificationKind","notificationPriority","notificationSubject","notificationContent","sourceDomain","sourceService","destinationUser","applicationId"]
+        }
+        ,
+        "blobReference" : {
+        	"type" : "object",
+        	"id" : "blobReference",
+        	"properties" : {
+            	"domainName" : {
+            		"type": "string"
+            	},
+            	"serviceName" : {
+            		"type": "string"
+            	},
+            	"targetObjectId" : {
+            		"type": "string"
+            	},
+            	"targetCopyId" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["targetObjectId"]
+        }
+        ,
+        "basicErrorPayload" : {
+        	"type" : "object",
+        	"id" : "basicErrorPayload",
+        	"properties" : {
+            	"message" : {
+            		"type": "string"
+            	},
+            	"errorCode" : {
+            		"type": "string"
+            	}
+        	}}
+        ,
+        "importError" : {
+        	"type" : "object",
+        	"id" : "importError",
+        	"properties" : {
+            	"errorType" : {
+            		"type": "string",
+            		"enum": ["CONVERT_ERROR","SERVICE_ERROR"]
+            	},
+            	"lineNumber" : {
+            		"type": "integer"
+            	},
+            	"bean" : {
+            		"type": "string"
+            	},
+            	"message" : {
+            		"type": "string"
+            	},
+            	"exceptionClass" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["errorType","lineNumber","bean","message","exceptionClass"]
+        }
+        ,
+        "fielddto" : {
+        	"type" : "object",
+        	"id" : "fielddto",
+        	"properties" : {
+            	"id" : {
+            		"type": "integer"
+            	},
+            	"name" : {
+            		"type": "string"
+            	},
+            	"fieldType" : {
+            		"type": "string",
+            		"enum": ["BINARY","BOOLEAN","DATE","DATETIME","DOUBLE","ENUM","INTEGER","MONEY","STRING","TIME"]
+            	},
+            	"start" : {
+            		"type": "integer"
+            	},
+            	"size" : {
+            		"type": "integer"
+            	},
+            	"maskPattern" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["id","name","fieldType"]
+        }
+        ,
+        "hookdto" : {
+        	"type" : "object",
+        	"id" : "hookdto",
+        	"properties" : {
+            	"hookFunction" : {
+            		"type": "string",
+            		"enum": ["BEFORE_PARSE","BEFORE_CONVERSION","ON_ERROR","VALIDATE"]
+            	},
+            	"script" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["hookFunction","script"]
+        }
+        ,
+        "layoutdto" : {
+        	"type" : "object",
+        	"id" : "layoutdto",
+        	"properties" : {
+            	"id" : {
+            		"type": "integer"
+            	},
+            	"description" : {
+            		"type": "string"
+            	},
+            	"fileFormat" : {
+            		"type": "string",
+            		"enum": ["CSV","FLAT","JSON","XML"]
+            	},
+            	"errorStrategy" : {
+            		"type": "string",
+            		"enum": ["CALL_SCRIPT","IGNORE","STOP"]
+            	},
+            	"delimiter" : {
+            		"type": "string"
+            	},
+            	"skipLines" : {
+            		"type": "integer"
+            	},
+            	"fields" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/fielddto"
+            		  , "minimum": 1
+            		}
+            	},
+            	"hooks" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/hookdto"
+            		}
+            	}
+        	},
+        	"required" : ["id","description","fileFormat","errorStrategy","skipLines","fields"]
+        }
+        ,
+        "importReport" : {
+        	"type" : "object",
+        	"id" : "importReport",
+        	"properties" : {
+            	"id" : {
+            		"type": "string"
+            	},
+            	"startTime" : {
+            		"type": "string",
+            		"format": "date-time"
+            	},
+            	"endTime" : {
+            		"type": "string",
+            		"format": "date-time"
+            	},
+            	"uri" : {
+            		"type": "string"
+            	},
+            	"beanClass" : {
+            		"type": "string"
+            	},
+            	"serviceClass" : {
+            		"type": "string"
+            	},
+            	"layout" : {
+            		"$ref": "#/properties/layoutdto"
+            	},
+            	"sucessCount" : {
+            		"type": "integer"
+            	},
+            	"errorsCount" : {
+            		"type": "integer"
+            	},
+            	"filteredCount" : {
+            		"type": "integer"
+            	},
+            	"skippedCount" : {
+            		"type": "integer"
+            	},
+            	"importErrors" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/importError"
+            		}
+            	}
+        	},
+        	"required" : ["id","startTime","endTime","uri","beanClass","serviceClass","layout","sucessCount","errorsCount","filteredCount","skippedCount"]
+        }
+        ,
+        "exportEventStatus" : {
+        	"type" : "object",
+        	"id" : "exportEventStatus",
+        	"properties" : {
+            	"importerId" : {
+            		"type": "string"
+            	},
+            	"eventType" : {
+            		"type": "string",
+            		"enum": ["CHUNK","DOWNLOAD","ERROR","FINISH","START"]
+            	},
+            	"recordCount" : {
+            		"type": "integer"
+            	}
+        	},
+        	"required" : ["importerId","eventType","recordCount"]
+        }
+        ,
+        "importEventStatus" : {
+        	"type" : "object",
+        	"id" : "importEventStatus",
+        	"properties" : {
+            	"importerId" : {
+            		"type": "string"
+            	},
+            	"eventType" : {
+            		"type": "string",
+            		"enum": ["CHUNK","DOWNLOAD","ERROR","FINISH","START"]
+            	},
+            	"status" : {
+            		"type": "string",
+            		"enum": ["DONE","DONE_WITH_ERRORS","DOWNLOADING","ERROR","NOT_STARTED","RUNNING"]
+            	},
+            	"errorMessage" : {
+            		"type": "string"
+            	},
+            	"recordCount" : {
+            		"type": "integer"
+            	},
+            	"importReport" : {
+            		"$ref": "#/properties/importReport"
+            	}
+        	},
+        	"required" : ["importerId","eventType","status","recordCount"]
+        }
+        ,
+        "exportConfig" : {
+        	"type" : "object",
+        	"id" : "exportConfig",
+        	"properties" : {
+            	"uri" : {
+            		"type": "string"
+            	},
+            	"layout" : {
+            		"$ref": "#/properties/layoutdto"
+            	},
+            	"async" : {
+            		"type": "boolean"
+            	},
+            	"errorStrategy" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["uri","layout","async","errorStrategy"]
+        }
+        ,
+        "importConfig" : {
+        	"type" : "object",
+        	"id" : "importConfig",
+        	"properties" : {
+            	"uri" : {
+            		"type": "string"
+            	},
+            	"layout" : {
+            		"$ref": "#/properties/layoutdto"
+            	},
+            	"async" : {
+            		"type": "boolean"
+            	},
+            	"batchSize" : {
+            		"type": "integer"
+            	},
+            	"errorStrategy" : {
+            		"type": "string",
+            		"enum": ["CALL_SCRIPT","IGNORE","STOP"]
+            	}
+        	},
+        	"required" : ["uri","layout","async","batchSize","errorStrategy"]
+        }
+        ,
+        "dependency" : {
+        	"type" : "object",
+        	"id" : "dependency",
+        	"properties" : {
+            	"domain" : {
+            		"type": "string"
+            	},
+            	"service" : {
+            		"type": "string"
+            	},
+            	"version" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["domain","service","version"]
+        }
+    }
+}

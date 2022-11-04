@@ -1,0 +1,37 @@
+<div *ngIf="!customTemplate else customTemplate">
+    <p-confirmDialog acceptLabel="{{'godev.godev20222.yes' | translate}}" acceptIcon="" rejectLabel="{{'godev.godev20222.no' | translate}}"
+        rejectIcon="">
+    </p-confirmDialog>
+    <form [formGroup]="formGroup" novalidate>
+        <p-panel *sLoadingState="loading" styleClass="form-group" [toggleable]="false" [collapsed]="mainPanelCollapsed">
+            <p-header>
+                {{"godev.godev20222.participante_form_general_title" | translate}}
+            </p-header>
+            <div class="ui-fluid" *ngIf="!customFormFields else customFormFields">
+                <div class="ui">
+                    <s-dynamic-form [fields]="formFields" [form]="formGroup" [errorMessages]="{
+        required: 'godev.godev20222.error_required' | translate,
+        min: 'godev.godev20222.error_min_value' | translate,
+        max: 'godev.godev20222.error_max_value' | translate,
+        minlength: 'godev.godev20222.error_min_length' | translate,
+        maxlength: 'godev.godev20222.error_max_length' | translate,
+        pattern: 'error_invalid' | translate
+    }">
+                    </s-dynamic-form>
+                </div>
+            </div>
+            <s-custom-fields domain="godev" service="godev20222" entity="participante" formControlName="custom" [invalidErrorLabel]="'godev.godev20222.error_invalid' | translate"></s-custom-fields>
+            <p-footer>
+                <button id="save-button" title="{{'godev.godev20222.save' | translate}} (Alt + Shift + S)" type="submit"
+                    pButton label="{{'godev.godev20222.save' | translate}}" (click)="onSave()" *ngIf="isNew() || permissions.editar"></button>
+                <button id="delete-button" title="{{'godev.godev20222.delete' | translate}} (Alt + Shift + X)" type="button"
+                    class="ui-button-secondary" pButton label="{{'godev.godev20222.delete' | translate}}"
+                    (click)="onDelete()" *ngIf="!isNew() && permissions.excluir" [disabled]="loading"></button>
+                <button id="cancel-button" title="{{'godev.godev20222.cancel' | translate}} (Alt + Shift + C)" type="button"
+                    class="ui-button-link" pButton label="{{'godev.godev20222.cancel' | translate}}" (click)="onCancel()"></button>
+            </p-footer>
+        </p-panel>
+    </form>
+</div>
+<!--{CA:FILE_CONTENTS:START}-->
+<!--{CA:FILE_CONTENTS:END}-->

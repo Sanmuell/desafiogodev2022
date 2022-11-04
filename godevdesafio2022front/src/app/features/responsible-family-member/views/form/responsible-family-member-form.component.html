@@ -1,0 +1,39 @@
+<div *ngIf="!customTemplate else customTemplate">
+    <p-confirmDialog acceptLabel="{{'godev.godev2022desafio.yes' | translate}}" acceptIcon="" rejectLabel="{{'godev.godev2022desafio.no' | translate}}"
+        rejectIcon="">
+    </p-confirmDialog>
+    <form [formGroup]="formGroup" novalidate>
+        <p-panel *sLoadingState="loading" styleClass="form-group" [toggleable]="false" [collapsed]="mainPanelCollapsed">
+            <p-header>
+                {{"godev.godev2022desafio.responsible_family_member_form_general_title" | translate}}
+            </p-header>
+            <div class="ui-fluid" *ngIf="!customFormFields else customFormFields">
+                <div class="ui">
+                    <s-dynamic-form [fields]="formFields" [form]="formGroup" [errorMessages]="{
+        required: 'godev.godev2022desafio.error_required' | translate,
+        min: 'godev.godev2022desafio.error_min_value' | translate,
+        max: 'godev.godev2022desafio.error_max_value' | translate,
+        minlength: 'godev.godev2022desafio.error_min_length' | translate,
+        maxlength: 'godev.godev2022desafio.error_max_length' | translate,
+        pattern: 'error_invalid' | translate
+    }">
+                    </s-dynamic-form>
+                </div>
+            </div>
+            <s-custom-fields domain="godev" service="godev2022desafio" entity="responsibleFamilyMember" formControlName="custom"
+                [invalidErrorLabel]="'godev.godev2022desafio.error_invalid' | translate"></s-custom-fields>
+            <p-footer>
+                <button id="save-button" title="{{'godev.godev2022desafio.save' | translate}} (Alt + Shift + S)" type="submit"
+                    pButton label="{{'godev.godev2022desafio.save' | translate}}" (click)="onSave()" *ngIf="isNew() || permissions.editar"></button>
+                <button id="delete-button" title="{{'godev.godev2022desafio.delete' | translate}} (Alt + Shift + X)"
+                    type="button" class="ui-button-secondary" pButton label="{{'godev.godev2022desafio.delete' | translate}}"
+                    (click)="onDelete()" *ngIf="!isNew() && permissions.excluir" [disabled]="loading"></button>
+                <button id="cancel-button" title="{{'godev.godev2022desafio.cancel' | translate}} (Alt + Shift + C)"
+                    type="button" class="ui-button-link" pButton label="{{'godev.godev2022desafio.cancel' | translate}}"
+                    (click)="onCancel()"></button>
+            </p-footer>
+        </p-panel>
+    </form>
+</div>
+<!--{CA:FILE_CONTENTS:START}-->
+<!--{CA:FILE_CONTENTS:END}-->

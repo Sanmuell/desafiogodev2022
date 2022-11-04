@@ -1,0 +1,585 @@
+<service appName="godev2022desafio" domain="godev" name="godev2022desafio" version="${version}">
+    <commands>
+        <action name="alterStatusPatient" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="id" type="string" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="patient" type="patientResponse" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <query name="getDoctorForSpeciality" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="speciality" type="string" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="doctor" type="doctor" optional="false" multivalued="true"/>
+            </output>
+        </query>
+        <query name="getPrescriptionsForDoctor" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="name" type="string" optional="true" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="prescription" type="prescription" optional="false" multivalued="true"/>
+            </output>
+        </query>
+        <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="metadataFormat" type="string" optional="true" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="metadata" type="string" optional="false" multivalued="false"/>
+            </output>
+        </query>
+        <action name="odata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+        </action>
+        <action name="importPatient" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="importConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="importJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <query name="exportPatient" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="exportConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="exportJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </query>
+        <action name="importDoctor" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="importConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="importJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <query name="exportDoctor" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="exportConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="exportJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </query>
+        <action name="importPrescription" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="importConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="importJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <query name="exportPrescription" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="exportConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="exportJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </query>
+        <action name="importResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="importConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="importJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <query name="exportResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="config" type="exportConfig" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="exportJobId" type="string" optional="false" multivalued="false"/>
+            </output>
+        </query>
+        <list name="listPatient" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="offset" type="integer" optional="false" multivalued="false"/>
+                <slot name="size" type="integer" optional="false" multivalued="false"/>
+                <slot name="orderBy" type="string" optional="false" multivalued="false"/>
+                <slot name="filter" type="string" optional="false" multivalued="false"/>
+                <slot name="displayFields" type="string" optional="false" multivalued="true"/>
+            </input>
+            <output>
+                <slot name="contents" type="patient" optional="false" multivalued="true"/>
+            </output>
+        </list>
+        <list name="listDoctor" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="offset" type="integer" optional="false" multivalued="false"/>
+                <slot name="size" type="integer" optional="false" multivalued="false"/>
+                <slot name="orderBy" type="string" optional="false" multivalued="false"/>
+                <slot name="filter" type="string" optional="false" multivalued="false"/>
+                <slot name="displayFields" type="string" optional="false" multivalued="true"/>
+            </input>
+            <output>
+                <slot name="contents" type="doctor" optional="false" multivalued="true"/>
+            </output>
+        </list>
+        <list name="listPrescription" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="offset" type="integer" optional="false" multivalued="false"/>
+                <slot name="size" type="integer" optional="false" multivalued="false"/>
+                <slot name="orderBy" type="string" optional="false" multivalued="false"/>
+                <slot name="filter" type="string" optional="false" multivalued="false"/>
+                <slot name="displayFields" type="string" optional="false" multivalued="true"/>
+            </input>
+            <output>
+                <slot name="contents" type="prescription" optional="false" multivalued="true"/>
+            </output>
+        </list>
+        <list name="listResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="offset" type="integer" optional="false" multivalued="false"/>
+                <slot name="size" type="integer" optional="false" multivalued="false"/>
+                <slot name="orderBy" type="string" optional="false" multivalued="false"/>
+                <slot name="filter" type="string" optional="false" multivalued="false"/>
+                <slot name="displayFields" type="string" optional="false" multivalued="true"/>
+            </input>
+            <output>
+                <slot name="contents" type="responsibleFamilyMember" optional="false" multivalued="true"/>
+            </output>
+        </list>
+        <query name="getDependencies" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <output>
+                <slot name="dependencies" type="dependency" optional="false" multivalued="true"/>
+            </output>
+        </query>
+        <create name="createPatient" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="patient"/>
+            <output type="patient"/>
+        </create>
+        <createBulk name="createBulkPatient" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="entities" type="patient" optional="false" multivalued="true"/>
+            </input>
+            <output>
+            </output>
+        </createBulk>
+        <createMerge name="createMergePatient" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="patient"/>
+            <output type="patient"/>
+        </createMerge>
+        <retrieve name="retrievePatient" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+            <output type="patient"/>
+        </retrieve>
+        <update name="updatePatient" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="patient"/>
+            <output type="patient"/>
+        </update>
+        <updateMerge name="updateMergePatient" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="patient"/>
+            <output type="patient"/>
+        </updateMerge>
+        <delete name="deletePatient" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+        </delete>
+        <create name="createDoctor" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="doctor"/>
+            <output type="doctor"/>
+        </create>
+        <createBulk name="createBulkDoctor" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="entities" type="doctor" optional="false" multivalued="true"/>
+            </input>
+            <output>
+            </output>
+        </createBulk>
+        <createMerge name="createMergeDoctor" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="doctor"/>
+            <output type="doctor"/>
+        </createMerge>
+        <retrieve name="retrieveDoctor" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+            <output type="doctor"/>
+        </retrieve>
+        <update name="updateDoctor" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="doctor"/>
+            <output type="doctor"/>
+        </update>
+        <updateMerge name="updateMergeDoctor" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="doctor"/>
+            <output type="doctor"/>
+        </updateMerge>
+        <delete name="deleteDoctor" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+        </delete>
+        <create name="createPrescription" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="prescription"/>
+            <output type="prescription"/>
+        </create>
+        <createBulk name="createBulkPrescription" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="entities" type="prescription" optional="false" multivalued="true"/>
+            </input>
+            <output>
+            </output>
+        </createBulk>
+        <createMerge name="createMergePrescription" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="prescription"/>
+            <output type="prescription"/>
+        </createMerge>
+        <retrieve name="retrievePrescription" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+            <output type="prescription"/>
+        </retrieve>
+        <update name="updatePrescription" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="prescription"/>
+            <output type="prescription"/>
+        </update>
+        <updateMerge name="updateMergePrescription" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="prescription"/>
+            <output type="prescription"/>
+        </updateMerge>
+        <delete name="deletePrescription" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+        </delete>
+        <create name="createResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="responsibleFamilyMember"/>
+            <output type="responsibleFamilyMember"/>
+        </create>
+        <createBulk name="createBulkResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="entities" type="responsibleFamilyMember" optional="false" multivalued="true"/>
+            </input>
+            <output>
+            </output>
+        </createBulk>
+        <createMerge name="createMergeResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="responsibleFamilyMember"/>
+            <output type="responsibleFamilyMember"/>
+        </createMerge>
+        <retrieve name="retrieveResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+            <output type="responsibleFamilyMember"/>
+        </retrieve>
+        <update name="updateResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="responsibleFamilyMember"/>
+            <output type="responsibleFamilyMember"/>
+        </update>
+        <updateMerge name="updateMergeResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="responsibleFamilyMember"/>
+            <output type="responsibleFamilyMember"/>
+        </updateMerge>
+        <delete name="deleteResponsibleFamilyMember" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input>
+                <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
+            </input>
+        </delete>
+    </commands>
+    <signals>
+    </signals>
+    <events>
+        <event name="patientAdmitted" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="id" type="string" optional="false" multivalued="false"/>
+                <slot name="name" type="string" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="serviceStarted" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="domain" type="string" optional="false" multivalued="false"/>
+                <slot name="service" type="string" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="notifyUserEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload type="notifyUserEventPayload"/>
+        </event>
+        <event name="importPatientEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="importEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="exportPatientEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="exportEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="importDoctorEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="importEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="exportDoctorEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="exportEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="importPrescriptionEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="importEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="exportPrescriptionEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="exportEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="importResponsibleFamilyMemberEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="importEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+        <event name="exportResponsibleFamilyMemberEvent" extensionPoint="false" visibility="PRIVATE">
+            <payload>
+                <slot name="eventpl" type="exportEventStatus" optional="false" multivalued="false"/>
+            </payload>
+        </event>
+    </events>
+    <records>
+        <record name="patientResponse">
+            <slot name="name" type="string" optional="false" multivalued="false"/>
+            <slot name="isAtivo" type="boolean" optional="false" multivalued="false"/>
+        </record>
+        <record name="patient">
+            <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>
+            <slot name="name" type="string" optional="false" multivalued="false"/>
+            <slot name="cpf" type="string" optional="true" multivalued="false"/>
+            <slot name="address" type="string" optional="false" multivalued="false"/>
+            <slot name="phone" type="integer" optional="false" multivalued="false"/>
+            <slot name="responsibleDoctors" type="doctor" optional="true" multivalued="true"/>
+            <slot name="responsibleFamilyMembers" type="responsibleFamilyMember" optional="true" multivalued="true"/>
+            <slot name="prescriptions" type="prescription" optional="true" multivalued="true"/>
+            <slot name="isAtivo" type="boolean" optional="true" multivalued="false"/>
+        </record>
+        <record name="doctor">
+            <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>
+            <slot name="name" type="string" optional="false" multivalued="false"/>
+            <slot name="cpf" type="string" optional="false" multivalued="false"/>
+            <slot name="crmNumber" type="integer" optional="false" multivalued="false"/>
+            <slot name="crmState" type="string" optional="false" multivalued="false"/>
+            <slot name="especiality" type="string" optional="false" multivalued="false"/>
+            <slot name="prescriptions" type="prescription" optional="true" multivalued="true"/>
+        </record>
+        <record name="prescription">
+            <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>
+            <slot name="drug" type="string" optional="false" multivalued="false"/>
+            <slot name="description" type="string" optional="false" multivalued="false"/>
+            <slot name="data" type="date" optional="false" multivalued="false"/>
+            <slot name="doctorResponsible" type="doctor" optional="true" multivalued="false"/>
+            <slot name="type" type="precriptionType" optional="false" multivalued="false"/>
+            <slot name="statementOfReponsability" type="boolean" optional="true" multivalued="false"/>
+            <slot name="patient" type="patient" optional="true" multivalued="false"/>
+        </record>
+        <record name="responsibleFamilyMember">
+            <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>
+            <slot name="name" type="string" optional="false" multivalued="false"/>
+            <slot name="cpf" type="string" optional="false" multivalued="false"/>
+            <slot name="kinship" type="string" optional="true" multivalued="false"/>
+        </record>
+        <record name="notifyUserEventPayload">
+            <slot name="notificationClass" type="string" optional="true" multivalued="false"/>
+            <slot name="notificationOrigin" type="string" optional="true" multivalued="false"/>
+            <slot name="notificationKind" type="userNotificationKind" optional="false" multivalued="false"/>
+            <slot name="notificationPriority" type="userNotificationPriority" optional="false" multivalued="false"/>
+            <slot name="notificationSubject" type="string" optional="false" multivalued="false"/>
+            <slot name="notificationContent" type="string" optional="false" multivalued="false"/>
+            <slot name="sourceDomain" type="string" optional="false" multivalued="false"/>
+            <slot name="sourceService" type="string" optional="false" multivalued="false"/>
+            <slot name="destinationUser" type="string" optional="false" multivalued="false"/>
+            <slot name="link" type="string" optional="true" multivalued="false"/>
+        </record>
+        <record name="emailNotifyUserEventPayload">
+            <slot name="notificationClass" type="string" optional="true" multivalued="false"/>
+            <slot name="notificationOrigin" type="string" optional="true" multivalued="false"/>
+            <slot name="notificationKind" type="userNotificationKind" optional="false" multivalued="false"/>
+            <slot name="notificationPriority" type="userNotificationPriority" optional="false" multivalued="false"/>
+            <slot name="notificationSubject" type="string" optional="false" multivalued="false"/>
+            <slot name="notificationContent" type="string" optional="false" multivalued="false"/>
+            <slot name="sourceDomain" type="string" optional="false" multivalued="false"/>
+            <slot name="sourceService" type="string" optional="false" multivalued="false"/>
+            <slot name="destinationUser" type="string" optional="false" multivalued="false"/>
+            <slot name="link" type="string" optional="true" multivalued="false"/>
+            <slot name="from" type="string" optional="false" multivalued="false"/>
+            <slot name="sendTo" type="string" optional="true" multivalued="true"/>
+            <slot name="format" type="eventEmailFormat" optional="true" multivalued="false"/>
+        </record>
+        <record name="pushNotifyUserEventPayload">
+            <slot name="notificationClass" type="string" optional="true" multivalued="false"/>
+            <slot name="notificationOrigin" type="string" optional="true" multivalued="false"/>
+            <slot name="notificationKind" type="userNotificationKind" optional="false" multivalued="false"/>
+            <slot name="notificationPriority" type="userNotificationPriority" optional="false" multivalued="false"/>
+            <slot name="notificationSubject" type="string" optional="false" multivalued="false"/>
+            <slot name="notificationContent" type="string" optional="false" multivalued="false"/>
+            <slot name="sourceDomain" type="string" optional="false" multivalued="false"/>
+            <slot name="sourceService" type="string" optional="false" multivalued="false"/>
+            <slot name="destinationUser" type="string" optional="false" multivalued="false"/>
+            <slot name="link" type="string" optional="true" multivalued="false"/>
+            <slot name="applicationId" type="string" optional="false" multivalued="false"/>
+        </record>
+        <record name="blobReference">
+            <slot name="domainName" type="string" optional="true" multivalued="false"/>
+            <slot name="serviceName" type="string" optional="true" multivalued="false"/>
+            <slot name="targetObjectId" type="string" optional="false" multivalued="false"/>
+            <slot name="targetCopyId" type="string" optional="true" multivalued="false"/>
+        </record>
+        <record name="basicErrorPayload">
+            <slot name="message" type="string" optional="true" multivalued="false"/>
+            <slot name="errorCode" type="string" optional="true" multivalued="false"/>
+        </record>
+        <record name="importError">
+            <slot name="errorType" type="errorType" optional="false" multivalued="false"/>
+            <slot name="lineNumber" type="integer" optional="false" multivalued="false"/>
+            <slot name="bean" type="string" optional="false" multivalued="false"/>
+            <slot name="message" type="string" optional="false" multivalued="false"/>
+            <slot name="exceptionClass" type="string" optional="false" multivalued="false"/>
+        </record>
+        <record name="fielddto">
+            <slot name="id" type="integer" optional="false" multivalued="false"/>
+            <slot name="name" type="string" optional="false" multivalued="false"/>
+            <slot name="fieldType" type="fieldType" optional="false" multivalued="false"/>
+            <slot name="start" type="integer" optional="true" multivalued="false"/>
+            <slot name="size" type="integer" optional="true" multivalued="false"/>
+            <slot name="maskPattern" type="string" optional="true" multivalued="false"/>
+        </record>
+        <record name="hookdto">
+            <slot name="hookFunction" type="hookFunction" optional="false" multivalued="false"/>
+            <slot name="script" type="string" optional="false" multivalued="false"/>
+        </record>
+        <record name="layoutdto">
+            <slot name="id" type="integer" optional="false" multivalued="false"/>
+            <slot name="description" type="string" optional="false" multivalued="false"/>
+            <slot name="fileFormat" type="fileFormat" optional="false" multivalued="false"/>
+            <slot name="errorStrategy" type="errorStrategy" optional="false" multivalued="false"/>
+            <slot name="delimiter" type="string" optional="true" multivalued="false"/>
+            <slot name="skipLines" type="integer" optional="false" multivalued="false"/>
+            <slot name="fields" type="fielddto" optional="false" multivalued="true"/>
+            <slot name="hooks" type="hookdto" optional="true" multivalued="true"/>
+        </record>
+        <record name="importReport">
+            <slot name="id" type="string" optional="false" multivalued="false"/>
+            <slot name="startTime" type="dateTime" optional="false" multivalued="false"/>
+            <slot name="endTime" type="dateTime" optional="false" multivalued="false"/>
+            <slot name="uri" type="string" optional="false" multivalued="false"/>
+            <slot name="beanClass" type="string" optional="false" multivalued="false"/>
+            <slot name="serviceClass" type="string" optional="false" multivalued="false"/>
+            <slot name="layout" type="layoutdto" optional="false" multivalued="false"/>
+            <slot name="sucessCount" type="integer" optional="false" multivalued="false"/>
+            <slot name="errorsCount" type="integer" optional="false" multivalued="false"/>
+            <slot name="filteredCount" type="integer" optional="false" multivalued="false"/>
+            <slot name="skippedCount" type="integer" optional="false" multivalued="false"/>
+            <slot name="importErrors" type="importError" optional="true" multivalued="true"/>
+        </record>
+        <record name="exportEventStatus">
+            <slot name="importerId" type="string" optional="false" multivalued="false"/>
+            <slot name="eventType" type="eventType" optional="false" multivalued="false"/>
+            <slot name="recordCount" type="integer" optional="false" multivalued="false"/>
+        </record>
+        <record name="importEventStatus">
+            <slot name="importerId" type="string" optional="false" multivalued="false"/>
+            <slot name="eventType" type="eventType" optional="false" multivalued="false"/>
+            <slot name="status" type="status" optional="false" multivalued="false"/>
+            <slot name="errorMessage" type="string" optional="true" multivalued="false"/>
+            <slot name="recordCount" type="integer" optional="false" multivalued="false"/>
+            <slot name="importReport" type="importReport" optional="true" multivalued="false"/>
+        </record>
+        <record name="exportConfig">
+            <slot name="uri" type="string" optional="false" multivalued="false"/>
+            <slot name="layout" type="layoutdto" optional="false" multivalued="false"/>
+            <slot name="async" type="boolean" optional="false" multivalued="false"/>
+            <slot name="errorStrategy" type="string" optional="false" multivalued="false"/>
+        </record>
+        <record name="importConfig">
+            <slot name="uri" type="string" optional="false" multivalued="false"/>
+            <slot name="layout" type="layoutdto" optional="false" multivalued="false"/>
+            <slot name="async" type="boolean" optional="false" multivalued="false"/>
+            <slot name="batchSize" type="integer" optional="false" multivalued="false"/>
+            <slot name="errorStrategy" type="errorStrategy" optional="false" multivalued="false"/>
+        </record>
+        <record name="dependency">
+            <slot name="domain" type="string" optional="false" multivalued="false"/>
+            <slot name="service" type="string" optional="false" multivalued="false"/>
+            <slot name="version" type="string" optional="false" multivalued="false"/>
+        </record>
+    </records>
+    <enumerations>
+        <enumeration name="precriptionType">
+            <value name="YELLOW"/>
+            <value name="BLUE"/>
+            <value name="WHITE"/>
+        </enumeration>
+        <enumeration name="userNotificationKind">
+            <value name="Operational"/>
+            <value name="Management"/>
+            <value name="News"/>
+        </enumeration>
+        <enumeration name="userNotificationPriority">
+            <value name="Error"/>
+            <value name="Alert"/>
+            <value name="None"/>
+        </enumeration>
+        <enumeration name="eventEmailFormat">
+            <value name="HTML"/>
+            <value name="PLAIN_TEXT"/>
+        </enumeration>
+        <enumeration name="fieldType">
+            <value name="BINARY"/>
+            <value name="BOOLEAN"/>
+            <value name="DATE"/>
+            <value name="DATETIME"/>
+            <value name="DOUBLE"/>
+            <value name="ENUM"/>
+            <value name="INTEGER"/>
+            <value name="MONEY"/>
+            <value name="STRING"/>
+            <value name="TIME"/>
+        </enumeration>
+        <enumeration name="fileFormat">
+            <value name="CSV"/>
+            <value name="FLAT"/>
+            <value name="JSON"/>
+            <value name="XML"/>
+        </enumeration>
+        <enumeration name="hookFunction">
+            <value name="BEFORE_PARSE"/>
+            <value name="BEFORE_CONVERSION"/>
+            <value name="ON_ERROR"/>
+            <value name="VALIDATE"/>
+        </enumeration>
+        <enumeration name="eventType">
+            <value name="CHUNK"/>
+            <value name="DOWNLOAD"/>
+            <value name="ERROR"/>
+            <value name="FINISH"/>
+            <value name="START"/>
+        </enumeration>
+        <enumeration name="errorStrategy">
+            <value name="CALL_SCRIPT"/>
+            <value name="IGNORE"/>
+            <value name="STOP"/>
+        </enumeration>
+        <enumeration name="status">
+            <value name="DONE"/>
+            <value name="DONE_WITH_ERRORS"/>
+            <value name="DOWNLOADING"/>
+            <value name="ERROR"/>
+            <value name="NOT_STARTED"/>
+            <value name="RUNNING"/>
+        </enumeration>
+        <enumeration name="errorType">
+            <value name="CONVERT_ERROR"/>
+            <value name="SERVICE_ERROR"/>
+        </enumeration>
+    </enumerations>
+</service>

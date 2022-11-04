@@ -1,0 +1,2398 @@
+{
+    "appName": "godev2022desafio",
+    "domain": "godev",
+    "documentation": "",
+    "isPublicSwaggerEnabled": true,
+    "name": "godev2022desafio",
+    "version": "${version}",
+    "commands" : {
+        "updateMergePatient": {
+            "endpointType" : "command",
+            "kind": "updateMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'updateMerge' request primitive for the Patient entity.",
+            "input" : "patient",
+            "output" : "patient",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "updatePrescription": {
+            "endpointType" : "command",
+            "kind": "update",
+            "priority" : "NORMAL",
+            "documentation": "The 'update' request primitive for the Prescription entity.",
+            "input" : "prescription",
+            "output" : "prescription",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "deletePatient": {
+            "endpointType" : "command",
+            "kind": "delete",
+            "priority" : "NORMAL",
+            "documentation": "The 'delete' request primitive for the Patient entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "listDoctor": {
+            "endpointType" : "command",
+            "kind": "list",
+            "priority" : "NORMAL",
+            "documentation": "The 'list' request primitive for the Doctor entity.",
+            "input" : {
+                "offset" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Offset to first result entity",
+                    "readOnly": false
+                },
+                "size" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected size of result list",
+                    "readOnly": false
+                },
+                "orderBy" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected result order",
+                    "readOnly": false
+                },
+                "filter" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Request filter",
+                    "readOnly": false
+                },
+                "displayFields" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Expected result fields",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "contents" : {
+                    "type": "doctor",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Result entities",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "updateDoctor": {
+            "endpointType" : "command",
+            "kind": "update",
+            "priority" : "NORMAL",
+            "documentation": "The 'update' request primitive for the Doctor entity.",
+            "input" : "doctor",
+            "output" : "doctor",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createMergeResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "createMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'createMerge' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : "responsibleFamilyMember",
+            "output" : "responsibleFamilyMember",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "updateMergeResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "updateMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'updateMerge' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : "responsibleFamilyMember",
+            "output" : "responsibleFamilyMember",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "updateMergeDoctor": {
+            "endpointType" : "command",
+            "kind": "updateMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'updateMerge' request primitive for the Doctor entity.",
+            "input" : "doctor",
+            "output" : "doctor",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "getPrescriptionsForDoctor": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "documentation": "Respons\u00E1vel por obter prescri\u00E7\u00F5es por nome do m\u00E9dico",
+            "idempotent": true,
+            "input" : {
+                "name" : {
+                    "type": "string",
+                    "optional": true,
+                    "multivalued": false,
+                    "documentation": "Nome do m\u00E9dico",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "prescription" : {
+                    "type": "prescription",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Resultado das prescricoes vinculadas ao nome do m\u00E9dico",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "updateResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "update",
+            "priority" : "NORMAL",
+            "documentation": "The 'update' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : "responsibleFamilyMember",
+            "output" : "responsibleFamilyMember",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "deleteResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "delete",
+            "priority" : "NORMAL",
+            "documentation": "The 'delete' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "retrievePatient": {
+            "endpointType" : "command",
+            "kind": "retrieve",
+            "priority" : "NORMAL",
+            "documentation": "The 'retrieve' request primitive for the Patient entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "output" : "patient",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "retrieveResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "retrieve",
+            "priority" : "NORMAL",
+            "documentation": "The 'retrieve' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "output" : "responsibleFamilyMember",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createPatient": {
+            "endpointType" : "command",
+            "kind": "create",
+            "priority" : "NORMAL",
+            "documentation": "The 'create' request primitive for the Patient entity.",
+            "input" : "patient",
+            "output" : "patient",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "listResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "list",
+            "priority" : "NORMAL",
+            "documentation": "The 'list' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : {
+                "offset" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Offset to first result entity",
+                    "readOnly": false
+                },
+                "size" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected size of result list",
+                    "readOnly": false
+                },
+                "orderBy" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected result order",
+                    "readOnly": false
+                },
+                "filter" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Request filter",
+                    "readOnly": false
+                },
+                "displayFields" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Expected result fields",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "contents" : {
+                    "type": "responsibleFamilyMember",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Result entities",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "odata": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "importDoctor": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "input" : {
+                "config" : {
+                    "type": "importConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "importJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "updatePatient": {
+            "endpointType" : "command",
+            "kind": "update",
+            "priority" : "NORMAL",
+            "documentation": "The 'update' request primitive for the Patient entity.",
+            "input" : "patient",
+            "output" : "patient",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "importResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "input" : {
+                "config" : {
+                    "type": "importConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "importJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "exportPatient": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "input" : {
+                "config" : {
+                    "type": "exportConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "exportJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "listPrescription": {
+            "endpointType" : "command",
+            "kind": "list",
+            "priority" : "NORMAL",
+            "documentation": "The 'list' request primitive for the Prescription entity.",
+            "input" : {
+                "offset" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Offset to first result entity",
+                    "readOnly": false
+                },
+                "size" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected size of result list",
+                    "readOnly": false
+                },
+                "orderBy" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected result order",
+                    "readOnly": false
+                },
+                "filter" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Request filter",
+                    "readOnly": false
+                },
+                "displayFields" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Expected result fields",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "contents" : {
+                    "type": "prescription",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Result entities",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createPrescription": {
+            "endpointType" : "command",
+            "kind": "create",
+            "priority" : "NORMAL",
+            "documentation": "The 'create' request primitive for the Prescription entity.",
+            "input" : "prescription",
+            "output" : "prescription",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "getDoctorForSpeciality": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "documentation": "Respons\u00E1vel por obter M\u00E9dicos por especialidade",
+            "idempotent": true,
+            "input" : {
+                "speciality" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Especialidade do m\u00E9dico",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "doctor" : {
+                    "type": "doctor",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "retorno",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createDoctor": {
+            "endpointType" : "command",
+            "kind": "create",
+            "priority" : "NORMAL",
+            "documentation": "The 'create' request primitive for the Doctor entity.",
+            "input" : "doctor",
+            "output" : "doctor",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "deletePrescription": {
+            "endpointType" : "command",
+            "kind": "delete",
+            "priority" : "NORMAL",
+            "documentation": "The 'delete' request primitive for the Prescription entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "getMetadata": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "documentation": "Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.",
+            "idempotent": true,
+            "input" : {
+                "metadataFormat" : {
+                    "type": "string",
+                    "optional": true,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "metadata" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "retrievePrescription": {
+            "endpointType" : "command",
+            "kind": "retrieve",
+            "priority" : "NORMAL",
+            "documentation": "The 'retrieve' request primitive for the Prescription entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "output" : "prescription",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "retrieveDoctor": {
+            "endpointType" : "command",
+            "kind": "retrieve",
+            "priority" : "NORMAL",
+            "documentation": "The 'retrieve' request primitive for the Doctor entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "output" : "doctor",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "importPrescription": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "input" : {
+                "config" : {
+                    "type": "importConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "importJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createBulkPrescription": {
+            "endpointType" : "command",
+            "kind": "createBulk",
+            "priority" : "NORMAL",
+            "documentation": "The 'createBulk' request primitive for the Prescription entity.",
+            "input" : {
+                "entities" : {
+                    "type": "prescription",
+                    "optional": false,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "deleteDoctor": {
+            "endpointType" : "command",
+            "kind": "delete",
+            "priority" : "NORMAL",
+            "documentation": "The 'delete' request primitive for the Doctor entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "getDependencies": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "documentation": "Returns a list with all dependencies from this service, along with their respective versions",
+            "idempotent": true,
+            "output" : {
+                "dependencies" : {
+                    "type": "dependency",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "List with this service dependencies",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createBulkResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "createBulk",
+            "priority" : "NORMAL",
+            "documentation": "The 'createBulk' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : {
+                "entities" : {
+                    "type": "responsibleFamilyMember",
+                    "optional": false,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "updateMergePrescription": {
+            "endpointType" : "command",
+            "kind": "updateMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'updateMerge' request primitive for the Prescription entity.",
+            "input" : "prescription",
+            "output" : "prescription",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "listPatient": {
+            "endpointType" : "command",
+            "kind": "list",
+            "priority" : "NORMAL",
+            "documentation": "The 'list' request primitive for the Patient entity.",
+            "input" : {
+                "offset" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Offset to first result entity",
+                    "readOnly": false
+                },
+                "size" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected size of result list",
+                    "readOnly": false
+                },
+                "orderBy" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected result order",
+                    "readOnly": false
+                },
+                "filter" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Request filter",
+                    "readOnly": false
+                },
+                "displayFields" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Expected result fields",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "contents" : {
+                    "type": "patient",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Result entities",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createBulkDoctor": {
+            "endpointType" : "command",
+            "kind": "createBulk",
+            "priority" : "NORMAL",
+            "documentation": "The 'createBulk' request primitive for the Doctor entity.",
+            "input" : {
+                "entities" : {
+                    "type": "doctor",
+                    "optional": false,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "create",
+            "priority" : "NORMAL",
+            "documentation": "The 'create' request primitive for the ResponsibleFamilyMember entity.",
+            "input" : "responsibleFamilyMember",
+            "output" : "responsibleFamilyMember",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "exportPrescription": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "input" : {
+                "config" : {
+                    "type": "exportConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "exportJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createMergeDoctor": {
+            "endpointType" : "command",
+            "kind": "createMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'createMerge' request primitive for the Doctor entity.",
+            "input" : "doctor",
+            "output" : "doctor",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createMergePatient": {
+            "endpointType" : "command",
+            "kind": "createMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'createMerge' request primitive for the Patient entity.",
+            "input" : "patient",
+            "output" : "patient",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "exportResponsibleFamilyMember": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "input" : {
+                "config" : {
+                    "type": "exportConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "exportJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createBulkPatient": {
+            "endpointType" : "command",
+            "kind": "createBulk",
+            "priority" : "NORMAL",
+            "documentation": "The 'createBulk' request primitive for the Patient entity.",
+            "input" : {
+                "entities" : {
+                    "type": "patient",
+                    "optional": false,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "importPatient": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "input" : {
+                "config" : {
+                    "type": "importConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "importJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "exportDoctor": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "input" : {
+                "config" : {
+                    "type": "exportConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "exportJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "alterStatusPatient": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "documentation": "Respons\u00E1vel por alterar status do paciente para ativo",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Id do paciente",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "patient" : {
+                    "type": "patientResponse",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Resposta da alteracao do status do paciente",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createMergePrescription": {
+            "endpointType" : "command",
+            "kind": "createMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'createMerge' request primitive for the Prescription entity.",
+            "input" : "prescription",
+            "output" : "prescription",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        }
+    },
+    "signals" : {
+    },
+    "events" : {
+        "patientAdmitted": {
+            "endpointType" : "event",
+            "documentation" : "Evento respons\u00E1vel por declarar que paciente foi admitido",
+            "payload" : {
+                "id" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Id do paciente",
+                    "readOnly": false
+                },
+                "name" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Nome do paciente",
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "serviceStarted": {
+            "endpointType" : "event",
+            "documentation" : "Default 'serviceStarted' event.",
+            "payload" : {
+                "domain" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                },
+                "service" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "notifyUserEvent": {
+            "endpointType" : "event",
+            "documentation" : "Default 'notifyUser' event.",
+            "payload" : "notifyUserEventPayload",
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "importPatientEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "importEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "exportPatientEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "exportEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "importDoctorEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "importEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "exportDoctorEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "exportEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "importPrescriptionEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "importEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "exportPrescriptionEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "exportEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "importResponsibleFamilyMemberEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "importEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        },
+        "exportResponsibleFamilyMemberEvent": {
+            "endpointType" : "event",
+            "payload" : {
+                "eventpl" : {
+                    "type": "exportEventStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "kind" : "Event",
+            "priority" : "LOW",
+            "extensionPoint" : false,
+            "visibility" : "PRIVATE"
+        }
+    },
+    "records": {
+        "patientResponse" : {
+            "name" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Nome do paciente",
+                "readOnly": false
+            },
+            "isAtivo" : {
+                "type": "boolean",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Status do paciente",
+                "readOnly": false
+            }
+        },
+        "patient" : {
+            "id" : {
+                "type": "string",
+                "format": "uuid",
+                "optional": true,
+                "multivalued": false,
+            	"readOnly": true
+            },
+            "name" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Nome do paciente",
+                "readOnly": false
+            },
+            "cpf" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "CPF do paciente",
+                "readOnly": false
+            },
+            "address" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Endereco Paciente",
+                "readOnly": false
+            },
+            "phone" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Telefone do paciente",
+                "readOnly": false
+            },
+            "responsibleDoctors" : {
+                "type": "doctor",
+                "optional": true,
+                "multivalued": true,
+                "documentation": "M\u00E9dico respons\u00E1vel pelo paciente",
+                "readOnly": false
+            },
+            "responsibleFamilyMembers" : {
+                "type": "responsibleFamilyMember",
+                "optional": true,
+                "multivalued": true,
+                "documentation": "Familiar respons\u00E1vel pelo paciente",
+                "readOnly": false
+            },
+            "prescriptions" : {
+                "type": "prescription",
+                "optional": true,
+                "multivalued": true,
+                "documentation": "Presci\u00E7\u00F5es m\u00E9dicas do paciente",
+                "readOnly": false
+            },
+            "isAtivo" : {
+                "type": "boolean",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Status do paciente",
+                "readOnly": false
+            ,
+            	"default": false
+            }
+        },
+        "doctor" : {
+            "id" : {
+                "type": "string",
+                "format": "uuid",
+                "optional": true,
+                "multivalued": false,
+            	"readOnly": true
+            },
+            "name" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Nome do medico",
+                "readOnly": false
+            },
+            "cpf" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Cpf do medico",
+                "readOnly": false
+            },
+            "crmNumber" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "CRM do medico",
+                "readOnly": false
+            },
+            "crmState" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Estado do CRM do medico",
+                "readOnly": false
+            },
+            "especiality" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "prescriptions" : {
+                "type": "prescription",
+                "optional": true,
+                "multivalued": true,
+                "documentation": "Prescri\u00E7\u00F5es",
+                "readOnly": false
+            }
+        },
+        "prescription" : {
+            "id" : {
+                "type": "string",
+                "format": "uuid",
+                "optional": true,
+                "multivalued": false,
+            	"readOnly": true
+            },
+            "drug" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Medicamento",
+                "readOnly": false
+            },
+            "description" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Descricao da prescricao",
+                "readOnly": false
+            },
+            "data" : {
+                "type": "date",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Data da prescricao",
+                "readOnly": false
+            },
+            "doctorResponsible" : {
+                "type": "doctor",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Medico que prescreveu",
+                "readOnly": false
+            },
+            "type" : {
+                "type": "precriptionType",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Tipo de prescricao",
+                "readOnly": false
+            },
+            "statementOfReponsability" : {
+                "type": "boolean",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Termo de responsabildiade\n               ",
+                "readOnly": false
+            ,
+            	"default": false
+            },
+            "patient" : {
+                "type": "patient",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Paciente",
+                "readOnly": false
+            }
+        },
+        "responsibleFamilyMember" : {
+            "id" : {
+                "type": "string",
+                "format": "uuid",
+                "optional": true,
+                "multivalued": false,
+            	"readOnly": true
+            },
+            "name" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Nome do Respons\u00E1vel",
+                "readOnly": false
+            },
+            "cpf" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Cpf do respons\u00E1vel",
+                "readOnly": false
+            },
+            "kinship" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Grau de parentesco",
+                "readOnly": false
+            }
+        },
+        "notifyUserEventPayload" : {
+            "notificationClass" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Class of notification",
+                "readOnly": false
+            },
+            "notificationOrigin" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Origin of notification. Free text. Optional.",
+                "readOnly": false
+            },
+            "notificationKind" : {
+                "type": "userNotificationKind",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification kind.",
+                "readOnly": false
+            },
+            "notificationPriority" : {
+                "type": "userNotificationPriority",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification priority.",
+                "readOnly": false
+            },
+            "notificationSubject" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification subject.",
+                "readOnly": false
+            },
+            "notificationContent" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification content.",
+                "readOnly": false
+            },
+            "sourceDomain" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Domain that generates the notification.",
+                "readOnly": false
+            },
+            "sourceService" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Service that generates the notification.",
+                "readOnly": false
+            },
+            "destinationUser" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Username of the destination user.",
+                "readOnly": false
+            },
+            "link" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Notification link",
+                "readOnly": false
+            }
+        },
+        "emailNotifyUserEventPayload" : {
+            "notificationClass" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Class of notification",
+                "readOnly": false
+            },
+            "notificationOrigin" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Origin of notification. Free text. Optional.",
+                "readOnly": false
+            },
+            "notificationKind" : {
+                "type": "userNotificationKind",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification kind.",
+                "readOnly": false
+            },
+            "notificationPriority" : {
+                "type": "userNotificationPriority",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification priority.",
+                "readOnly": false
+            },
+            "notificationSubject" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification subject.",
+                "readOnly": false
+            },
+            "notificationContent" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification content.",
+                "readOnly": false
+            },
+            "sourceDomain" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Domain that generates the notification.",
+                "readOnly": false
+            },
+            "sourceService" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Service that generates the notification.",
+                "readOnly": false
+            },
+            "destinationUser" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Username of the destination user.",
+                "readOnly": false
+            },
+            "link" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Notification link",
+                "readOnly": false
+            },
+            "from" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Email sender address",
+                "readOnly": false
+            },
+            "sendTo" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": true,
+                "documentation": "Additional recipients to send the email to",
+                "readOnly": false
+            },
+            "format" : {
+                "type": "eventEmailFormat",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Email format",
+                "readOnly": false
+            }
+        },
+        "pushNotifyUserEventPayload" : {
+            "notificationClass" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Class of notification",
+                "readOnly": false
+            },
+            "notificationOrigin" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Origin of notification. Free text. Optional.",
+                "readOnly": false
+            },
+            "notificationKind" : {
+                "type": "userNotificationKind",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification kind.",
+                "readOnly": false
+            },
+            "notificationPriority" : {
+                "type": "userNotificationPriority",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification priority.",
+                "readOnly": false
+            },
+            "notificationSubject" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification subject.",
+                "readOnly": false
+            },
+            "notificationContent" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Notification content.",
+                "readOnly": false
+            },
+            "sourceDomain" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Domain that generates the notification.",
+                "readOnly": false
+            },
+            "sourceService" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Service that generates the notification.",
+                "readOnly": false
+            },
+            "destinationUser" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Username of the destination user.",
+                "readOnly": false
+            },
+            "link" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "Notification link",
+                "readOnly": false
+            },
+            "applicationId" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Apple/Google application id",
+                "readOnly": false
+            }
+        },
+        "blobReference" : {
+            "domainName" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "The domain the blob belongs to.",
+                "readOnly": false
+            },
+            "serviceName" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "The service the blob belongs to.",
+                "readOnly": false
+            },
+            "targetObjectId" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "The basic id of the blob.",
+                "readOnly": false
+            },
+            "targetCopyId" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "The id of the blob copy.",
+                "readOnly": false
+            }
+        },
+        "basicErrorPayload" : {
+            "message" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "The user-facing error message, if any.",
+                "readOnly": false
+            },
+            "errorCode" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "documentation": "The program-accessible (and service-specific) error code.",
+                "readOnly": false
+            }
+        },
+        "importError" : {
+            "errorType" : {
+                "type": "errorType",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "lineNumber" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "bean" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "message" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "exceptionClass" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "fielddto" : {
+            "id" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "name" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "fieldType" : {
+                "type": "fieldType",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "start" : {
+                "type": "integer",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "size" : {
+                "type": "integer",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "maskPattern" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "hookdto" : {
+            "hookFunction" : {
+                "type": "hookFunction",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "script" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "layoutdto" : {
+            "id" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "description" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "fileFormat" : {
+                "type": "fileFormat",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "errorStrategy" : {
+                "type": "errorStrategy",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "delimiter" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "skipLines" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "fields" : {
+                "type": "fielddto",
+                "optional": false,
+                "multivalued": true,
+                "readOnly": false
+            },
+            "hooks" : {
+                "type": "hookdto",
+                "optional": true,
+                "multivalued": true,
+                "readOnly": false
+            }
+        },
+        "importReport" : {
+            "id" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "startTime" : {
+                "type": "dateTime",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "endTime" : {
+                "type": "dateTime",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "uri" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "beanClass" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "serviceClass" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "layout" : {
+                "type": "layoutdto",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "sucessCount" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "errorsCount" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "filteredCount" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "skippedCount" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "importErrors" : {
+                "type": "importError",
+                "optional": true,
+                "multivalued": true,
+                "readOnly": false
+            }
+        },
+        "exportEventStatus" : {
+            "importerId" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "eventType" : {
+                "type": "eventType",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "recordCount" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "importEventStatus" : {
+            "importerId" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "eventType" : {
+                "type": "eventType",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "status" : {
+                "type": "status",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "errorMessage" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "recordCount" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "importReport" : {
+                "type": "importReport",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "exportConfig" : {
+            "uri" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "layout" : {
+                "type": "layoutdto",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "async" : {
+                "type": "boolean",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "errorStrategy" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "importConfig" : {
+            "uri" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "layout" : {
+                "type": "layoutdto",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "async" : {
+                "type": "boolean",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "batchSize" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "errorStrategy" : {
+                "type": "errorStrategy",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "dependency" : {
+            "domain" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Domain of the dependency service",
+                "readOnly": false
+            },
+            "service" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Name of the dependency service",
+                "readOnly": false
+            },
+            "version" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Version of the dependency service",
+                "readOnly": false
+            }
+        }
+    },
+    "enumerations": {
+        "precriptionType" : [ 
+            "YELLOW",
+            "BLUE",
+            "WHITE"
+        ],
+        "userNotificationKind" : [ 
+            "Operational",
+            "Management",
+            "News"
+        ],
+        "userNotificationPriority" : [ 
+            "Error",
+            "Alert",
+            "None"
+        ],
+        "eventEmailFormat" : [ 
+            "HTML",
+            "PLAIN_TEXT"
+        ],
+        "fieldType" : [ 
+            "BINARY",
+            "BOOLEAN",
+            "DATE",
+            "DATETIME",
+            "DOUBLE",
+            "ENUM",
+            "INTEGER",
+            "MONEY",
+            "STRING",
+            "TIME"
+        ],
+        "fileFormat" : [ 
+            "CSV",
+            "FLAT",
+            "JSON",
+            "XML"
+        ],
+        "hookFunction" : [ 
+            "BEFORE_PARSE",
+            "BEFORE_CONVERSION",
+            "ON_ERROR",
+            "VALIDATE"
+        ],
+        "eventType" : [ 
+            "CHUNK",
+            "DOWNLOAD",
+            "ERROR",
+            "FINISH",
+            "START"
+        ],
+        "errorStrategy" : [ 
+            "CALL_SCRIPT",
+            "IGNORE",
+            "STOP"
+        ],
+        "status" : [ 
+            "DONE",
+            "DONE_WITH_ERRORS",
+            "DOWNLOADING",
+            "ERROR",
+            "NOT_STARTED",
+            "RUNNING"
+        ],
+        "errorType" : [ 
+            "CONVERT_ERROR",
+            "SERVICE_ERROR"
+        ]
+    },
+    "entities" : {
+        "patient" : {
+            "id": "id",
+            "documentation": "Paciente",
+            "customizable": true,
+            "slots": { 
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": true,
+                    "multivalued": false,
+                	"readOnly": true
+                },
+                "name" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Nome do paciente",
+                    "readOnly": false
+                },
+                "cpf" : {
+                    "type": "string",
+                    "optional": true,
+                    "multivalued": false,
+                    "documentation": "CPF do paciente",
+                    "readOnly": false
+                },
+                "address" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Endereco Paciente",
+                    "readOnly": false
+                },
+                "phone" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Telefone do paciente",
+                    "readOnly": false
+                },
+                "responsibleDoctors" : {
+                    "type": "doctor",
+                    "optional": true,
+                    "multivalued": true,
+                    "documentation": "M\u00E9dico respons\u00E1vel pelo paciente",
+                    "readOnly": false
+                },
+                "responsibleFamilyMembers" : {
+                    "type": "responsibleFamilyMember",
+                    "optional": true,
+                    "multivalued": true,
+                    "documentation": "Familiar respons\u00E1vel pelo paciente",
+                    "readOnly": false
+                },
+                "prescriptions" : {
+                    "type": "prescription",
+                    "optional": true,
+                    "multivalued": true,
+                    "documentation": "Presci\u00E7\u00F5es m\u00E9dicas do paciente",
+                    "readOnly": false
+                },
+                "isAtivo" : {
+                    "type": "boolean",
+                    "optional": true,
+                    "multivalued": false,
+                    "documentation": "Status do paciente",
+                    "readOnly": false
+                ,
+                	"default": false
+                }
+            }    
+        },
+        "doctor" : {
+            "id": "id",
+            "documentation": "M\u00E9dico",
+            "customizable": true,
+            "slots": { 
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": true,
+                    "multivalued": false,
+                	"readOnly": true
+                },
+                "name" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Nome do medico",
+                    "readOnly": false
+                },
+                "cpf" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Cpf do medico",
+                    "readOnly": false
+                },
+                "crmNumber" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "CRM do medico",
+                    "readOnly": false
+                },
+                "crmState" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Estado do CRM do medico",
+                    "readOnly": false
+                },
+                "especiality" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                },
+                "prescriptions" : {
+                    "type": "prescription",
+                    "optional": true,
+                    "multivalued": true,
+                    "documentation": "Prescri\u00E7\u00F5es",
+                    "readOnly": false
+                }
+            }    
+        },
+        "prescription" : {
+            "id": "id",
+            "documentation": "Prescricao M\u00E9dica",
+            "customizable": true,
+            "slots": { 
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": true,
+                    "multivalued": false,
+                	"readOnly": true
+                },
+                "drug" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Medicamento",
+                    "readOnly": false
+                },
+                "description" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Descricao da prescricao",
+                    "readOnly": false
+                },
+                "data" : {
+                    "type": "date",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Data da prescricao",
+                    "readOnly": false
+                },
+                "doctorResponsible" : {
+                    "type": "doctor",
+                    "optional": true,
+                    "multivalued": false,
+                    "documentation": "Medico que prescreveu",
+                    "readOnly": false
+                },
+                "type" : {
+                    "type": "precriptionType",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Tipo de prescricao",
+                    "readOnly": false
+                },
+                "statementOfReponsability" : {
+                    "type": "boolean",
+                    "optional": true,
+                    "multivalued": false,
+                    "documentation": "Termo de responsabildiade\n               ",
+                    "readOnly": false
+                ,
+                	"default": false
+                },
+                "patient" : {
+                    "type": "patient",
+                    "optional": true,
+                    "multivalued": false,
+                    "documentation": "Paciente",
+                    "readOnly": false
+                }
+            }    
+        },
+        "responsibleFamilyMember" : {
+            "id": "id",
+            "documentation": "Familiar Respons\u00E1vel",
+            "customizable": true,
+            "slots": { 
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": true,
+                    "multivalued": false,
+                	"readOnly": true
+                },
+                "name" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Nome do Respons\u00E1vel",
+                    "readOnly": false
+                },
+                "cpf" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Cpf do respons\u00E1vel",
+                    "readOnly": false
+                },
+                "kinship" : {
+                    "type": "string",
+                    "optional": true,
+                    "multivalued": false,
+                    "documentation": "Grau de parentesco",
+                    "readOnly": false
+                }
+            }    
+        }
+    },
+    "apis" : {
+    }
+	,
+	"versions": {
+	}
+}

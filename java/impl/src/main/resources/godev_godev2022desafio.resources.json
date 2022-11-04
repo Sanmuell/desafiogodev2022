@@ -1,0 +1,103 @@
+{
+  "domainDescription": "godev",
+  "domain": "godev",
+  "service": "godev2022desafio",
+  "description": "Aplicação GoDev",
+  "resources": [
+    {
+      "name": "patient",
+      "label": "platform.authorization.godev_godev2022desafio_entities_patient_label",
+      "description": "platform.authorization.godev_godev2022desafio_entities_patient_description",
+      "URI": "res://senior.com.br/godev/godev2022desafio/entities/patient",
+      "actions" : [
+        {
+          "name": "Incluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_patient_action_incluir_label"
+        },
+        {
+          "name": "Editar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_patient_action_editar_label"
+        },
+        {
+          "name": "Excluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_patient_action_excluir_label"
+        },
+        {
+          "name": "Visualizar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_patient_action_visualizar_label"
+        }
+      ]
+    },
+    {
+      "name": "doctor",
+      "label": "platform.authorization.godev_godev2022desafio_entities_doctor_label",
+      "description": "platform.authorization.godev_godev2022desafio_entities_doctor_description",
+      "URI": "res://senior.com.br/godev/godev2022desafio/entities/doctor",
+      "actions" : [
+        {
+          "name": "Incluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_doctor_action_incluir_label"
+        },
+        {
+          "name": "Editar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_doctor_action_editar_label"
+        },
+        {
+          "name": "Excluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_doctor_action_excluir_label"
+        },
+        {
+          "name": "Visualizar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_doctor_action_visualizar_label"
+        }
+      ]
+    },
+    {
+      "name": "prescription",
+      "label": "platform.authorization.godev_godev2022desafio_entities_prescription_label",
+      "description": "platform.authorization.godev_godev2022desafio_entities_prescription_description",
+      "URI": "res://senior.com.br/godev/godev2022desafio/entities/prescription",
+      "actions" : [
+        {
+          "name": "Incluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_prescription_action_incluir_label"
+        },
+        {
+          "name": "Editar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_prescription_action_editar_label"
+        },
+        {
+          "name": "Excluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_prescription_action_excluir_label"
+        },
+        {
+          "name": "Visualizar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_prescription_action_visualizar_label"
+        }
+      ]
+    },
+    {
+      "name": "responsibleFamilyMember",
+      "label": "platform.authorization.godev_godev2022desafio_entities_responsiblefamilymember_label",
+      "description": "platform.authorization.godev_godev2022desafio_entities_responsiblefamilymember_description",
+      "URI": "res://senior.com.br/godev/godev2022desafio/entities/responsibleFamilyMember",
+      "actions" : [
+        {
+          "name": "Incluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_responsiblefamilymember_action_incluir_label"
+        },
+        {
+          "name": "Editar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_responsiblefamilymember_action_editar_label"
+        },
+        {
+          "name": "Excluir",
+          "label": "platform.authorization.godev_godev2022desafio_entities_responsiblefamilymember_action_excluir_label"
+        },
+        {
+          "name": "Visualizar",
+          "label": "platform.authorization.godev_godev2022desafio_entities_responsiblefamilymember_action_visualizar_label"
+        }
+      ]
+    }
+  ]}

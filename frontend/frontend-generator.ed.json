@@ -1,0 +1,234 @@
+{
+	"version": "1.0.0",
+	"edlVersion": "31.0.0",
+	"app": "godev2022",
+	"domain": "godev",
+	"service": "godev2022",
+	"enumType": "string",
+	"enumerations": {
+	},
+	"entities": {
+		"tarefa": {
+			"id": "id",
+			"name": "tarefa",
+			"customizable": true,
+			"external": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"descricao": {
+					"name": "descricao",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"participantes": {
+					"name": "participantes",
+					"type": "participante",
+					"optional": true,
+					"hidden": false,
+					"multivalued": true,
+					"readOnly": false
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "descricao",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"descricao"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "descricao",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"descricao"
+				]
+			},
+			"relationships": {
+				"participante": [
+					{
+						"type": "aggregation",
+						"attribute": "participantes",
+						"ownerEntity": "tarefa",
+						"entityName": "participante",
+						"optional": true,
+						"filterDependent": false,
+						"multivalued": true,
+						"lookup": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "idade",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"idade"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "idade",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"idade"
+							]
+						}
+					}
+				]
+			}
+		},
+		"participante": {
+			"id": "id",
+			"name": "participante",
+			"customizable": true,
+			"external": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"idade": {
+					"name": "idade",
+					"type": "integer",
+					"thousandSeparator": ".",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "idade",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"idade"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "idade",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"idade"
+				]
+			}
+		}
+	},
+	"translations": {
+		"godev.godev20222.participante": "Representa um participante em uma tarefa a ser realizada",
+		"godev.godev20222.participante_id": "Código único do participante",
+		"godev.godev20222.participante_nome": "Nome do participante",
+		"godev.godev20222.participante_idade": "Idade do participante",
+		"godev.godev20222.tarefa": "Responsável pelo gerenciamento de tarefas a serem realizadas (to-do list)",
+		"godev.godev20222.tarefa_id": "Código único da tarefa",
+		"godev.godev20222.tarefa_descricao": "Descrição da tarefa a ser realizada",
+		"godev.godev20222.tarefa_participantes": "Lista de participantes da tarefa"
+	}
+}

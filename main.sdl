@@ -1,0 +1,151 @@
+domain godev
+
+service godev2022desafio {
+    endpoints {
+
+        "Responsável por alterar status do paciente"
+        action alterStatusPatient {
+                in {
+                    "Id do paciente"
+                    id: string
+
+                }
+                out {
+                    "Resposta da alteracao do status do paciente"
+                    patient : patientResponse
+                }
+        }
+
+        "Responsável por obter Médicos por especialidade"
+        query getDoctorForSpeciality {
+              in {
+                  "Especialidade do médico"
+                  speciality : string
+              }
+              out {
+                  "retorno"
+                  doctor : doctor*
+             }
+        }
+
+        "Responsável por obter prescrições por nome do médico"
+        query getPrescriptionsForDoctor {
+                 in {
+                     "Nome do médico"
+                     name : string?
+                 }
+                 out {
+                     "Resultado das prescricoes vinculadas ao nome do médico"
+                     prescription : prescription*
+                }
+        }
+
+        "Evento responsável por declarar que paciente foi admitido"
+        event patientAdmitted {
+                 payload {
+                   "Id do paciente"
+                   id : string
+                   "Nome do paciente"
+                   name: string
+                 }
+        }
+    }
+
+
+     types {
+
+        "Retorno de alteracao de status"
+         record patientResponse {
+               "Nome do paciente"
+                name: string
+                "Status do paciente"
+                isAtivo : boolean
+         }
+
+         "Tipo de receita"
+         enumeration precriptionType {
+                "Prescricao tipo amarela"
+                YELLOW
+                "Prescricao tipo azul"
+                BLUE
+                "Prescricao tipo branca"
+                WHITE
+         }
+     }
+
+     entities {
+
+        "Paciente"
+        entity patient {
+               "Id do paciente"
+               id: uuid?
+               "Nome do paciente"
+               name : string
+               "CPF do paciente"
+               cpf: string?
+               "Endereco Paciente"
+               address: string
+               "Telefone do paciente"
+               phone: integer
+               "Médico responsável pelo paciente"
+               responsibleDoctors: doctor?*
+               "Familiar responsável pelo paciente"
+               responsibleFamilyMembers: responsibleFamilyMember?*
+               "Prescições médicas do paciente"
+               prescriptions: prescription?*
+               "Status do paciente"
+               isAtivo : boolean? default:false
+        }
+
+        "Médico"
+        entity doctor {
+               "Id do medico"
+               id: uuid ?
+               "Nome do medico"
+               name : string
+               "Cpf do medico"
+               cpf: string
+               "CRM do medico"
+               crmNumber: integer
+               "Estado do CRM do medico"
+               crmState: string
+               "Especialidade"
+               especiality: string
+               "Prescrições"
+               prescriptions : prescription?*
+        }
+
+
+        "Prescricao Médica"
+        entity prescription {
+               "Id da prescricao"
+               id: uuid ?
+               "Medicamento"
+               drug : string
+               "Descricao da prescricao"
+               description: string
+               "Data da prescricao"
+               data : date
+               "Medico que prescreveu"
+               doctorResponsible : doctor?
+               "Tipo de prescricao"
+               type: precriptionType
+               "Termo de responsabildiade
+               "statementOfReponsability : boolean ? default: false
+               "Paciente"
+               patient : patient?
+        }
+
+        "Familiar Responsável"
+        entity responsibleFamilyMember {
+               "Id do Familiar Responsável"
+               id: uuid ?
+               "Nome do Responsável"
+               name : string
+               "Cpf do responsável"
+               cpf: string
+               "Grau de parentesco"
+               kinship : string?
+        }
+    }
+} 

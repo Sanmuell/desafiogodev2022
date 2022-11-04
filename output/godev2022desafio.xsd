@@ -1,0 +1,1015 @@
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.senior.com.br/godev/godev2022desafio"
+    targetNamespace="http://www.senior.com.br/godev/godev2022desafio"
+    elementFormDefault="qualified">
+    
+    <xsd:attribute name="deprecated" type="xsd:string" default=""/>
+    <xsd:attribute name="anonymous" type="xsd:boolean" default="false"/>
+    
+    <xsd:attribute name="i18n" type="xsd:boolean" default="false"/>
+    
+    <!-- Public types -->
+    <xsd:complexType name="patientResponse">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="isAtivo" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="precriptionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="YELLOW"/>
+            <xsd:enumeration value="BLUE"/>
+            <xsd:enumeration value="WHITE"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:complexType name="patient">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="cpf" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="address" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="phone" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <!-- collection wrapper for responsibleDoctors -->
+            <xsd:element name="responsibleDoctors" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="item" type="doctor" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <!-- collection wrapper for responsibleFamilyMembers -->
+            <xsd:element name="responsibleFamilyMembers" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="item" type="responsibleFamilyMember" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <!-- collection wrapper for prescriptions -->
+            <xsd:element name="prescriptions" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="item" type="prescription" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="isAtivo" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false" readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="doctor">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="cpf" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="crmNumber" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="crmState" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="especiality" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <!-- collection wrapper for prescriptions -->
+            <xsd:element name="prescriptions" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="item" type="prescription" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="prescription">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="drug" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="data" type="xsd:date" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="doctorResponsible" type="doctor" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="type" type="precriptionType" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="statementOfReponsability" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false" readOnly="false">
+            </xsd:element>
+            <xsd:element name="patient" type="patient" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="responsibleFamilyMember">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="cpf" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="kinship" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="userNotificationKind">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Operational"/>
+            <xsd:enumeration value="Management"/>
+            <xsd:enumeration value="News"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:simpleType name="userNotificationPriority">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Error"/>
+            <xsd:enumeration value="Alert"/>
+            <xsd:enumeration value="None"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:complexType name="notifyUserEventPayload">
+        <xsd:sequence>
+            <xsd:element name="notificationClass" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="notificationOrigin" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="notificationKind" type="userNotificationKind" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="notificationPriority" type="userNotificationPriority" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="notificationSubject" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="notificationContent" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="sourceDomain" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="sourceService" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="destinationUser" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="link" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="eventEmailFormat">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="HTML"/>
+            <xsd:enumeration value="PLAIN_TEXT"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:complexType name="emailNotifyUserEventPayload">
+        <xsd:complexContent>
+            <xsd:extension base="notifyUserEventPayload">
+                <xsd:sequence>
+                    <xsd:element name="from" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <!-- collection wrapper for sendTo -->
+                    <xsd:element name="sendTo" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="format" type="eventEmailFormat" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="pushNotifyUserEventPayload">
+        <xsd:complexContent>
+            <xsd:extension base="notifyUserEventPayload">
+                <xsd:sequence>
+                    <xsd:element name="applicationId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="blobReference">
+        <xsd:sequence>
+            <xsd:element name="domainName" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="serviceName" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="targetObjectId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="targetCopyId" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="basicErrorPayload">
+        <xsd:sequence>
+            <xsd:element name="message" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="errorCode" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="fieldType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BINARY"/>
+            <xsd:enumeration value="BOOLEAN"/>
+            <xsd:enumeration value="DATE"/>
+            <xsd:enumeration value="DATETIME"/>
+            <xsd:enumeration value="DOUBLE"/>
+            <xsd:enumeration value="ENUM"/>
+            <xsd:enumeration value="INTEGER"/>
+            <xsd:enumeration value="MONEY"/>
+            <xsd:enumeration value="STRING"/>
+            <xsd:enumeration value="TIME"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:simpleType name="fileFormat">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CSV"/>
+            <xsd:enumeration value="FLAT"/>
+            <xsd:enumeration value="JSON"/>
+            <xsd:enumeration value="XML"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:simpleType name="hookFunction">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BEFORE_PARSE"/>
+            <xsd:enumeration value="BEFORE_CONVERSION"/>
+            <xsd:enumeration value="ON_ERROR"/>
+            <xsd:enumeration value="VALIDATE"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:simpleType name="eventType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CHUNK"/>
+            <xsd:enumeration value="DOWNLOAD"/>
+            <xsd:enumeration value="ERROR"/>
+            <xsd:enumeration value="FINISH"/>
+            <xsd:enumeration value="START"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:simpleType name="errorStrategy">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CALL_SCRIPT"/>
+            <xsd:enumeration value="IGNORE"/>
+            <xsd:enumeration value="STOP"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:simpleType name="status">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DONE"/>
+            <xsd:enumeration value="DONE_WITH_ERRORS"/>
+            <xsd:enumeration value="DOWNLOADING"/>
+            <xsd:enumeration value="ERROR"/>
+            <xsd:enumeration value="NOT_STARTED"/>
+            <xsd:enumeration value="RUNNING"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:simpleType name="errorType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CONVERT_ERROR"/>
+            <xsd:enumeration value="SERVICE_ERROR"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    <xsd:complexType name="importError">
+        <xsd:sequence>
+            <xsd:element name="errorType" type="errorType" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="lineNumber" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="bean" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="message" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="exceptionClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="fielddto">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="fieldType" type="fieldType" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="start" type="xsd:long" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="size" type="xsd:long" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="maskPattern" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="hookdto">
+        <xsd:sequence>
+            <xsd:element name="hookFunction" type="hookFunction" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="script" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="layoutdto">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="fileFormat" type="fileFormat" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="errorStrategy" type="errorStrategy" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="delimiter" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="skipLines" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <!-- collection wrapper for fields -->
+            <xsd:element name="fields" minOccurs="1" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="item" type="fielddto" minOccurs="1" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <!-- collection wrapper for hooks -->
+            <xsd:element name="hooks" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="item" type="hookdto" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="importReport">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="startTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="endTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="beanClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="serviceClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="sucessCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="errorsCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="filteredCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="skippedCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <!-- collection wrapper for importErrors -->
+            <xsd:element name="importErrors" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="item" type="importError" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="exportEventStatus">
+        <xsd:sequence>
+            <xsd:element name="importerId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="eventType" type="eventType" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="recordCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="importEventStatus">
+        <xsd:sequence>
+            <xsd:element name="importerId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="eventType" type="eventType" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="status" type="status" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="errorMessage" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="recordCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="importReport" type="importReport" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="exportConfig">
+        <xsd:sequence>
+            <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="async" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="errorStrategy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="importConfig">
+        <xsd:sequence>
+            <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="async" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="batchSize" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="errorStrategy" type="errorStrategy" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="dependency">
+        <xsd:sequence>
+            <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="service" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="version" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="uuid">
+        <xsd:restriction base="xsd:string">
+        	<xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </xsd:restriction>
+     </xsd:simpleType>
+    
+    <!-- Message payload elements for signals -->
+    
+    <!-- Message input/output elements for commands -->
+    <xsd:element name="updateMergePatient">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="updatePrescription">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="deletePatient">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listDoctor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <!-- collection wrapper for displayFields -->
+                <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listDoctorOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for contents -->
+                <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="doctor" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="updateDoctor">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="createMergeResponsibleFamilyMember">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="updateMergeResponsibleFamilyMember">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="updateMergeDoctor">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="getPrescriptionsForDoctor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPrescriptionsForDoctorOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for prescription -->
+                <xsd:element name="prescription" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="prescription" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="updateResponsibleFamilyMember">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="deleteResponsibleFamilyMember">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="retrievePatient">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="retrieveResponsibleFamilyMember">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createPatient">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="listResponsibleFamilyMember">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <!-- collection wrapper for displayFields -->
+                <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listResponsibleFamilyMemberOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for contents -->
+                <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="responsibleFamilyMember" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="odata">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="importDoctor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="importDoctorOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="updatePatient">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="importResponsibleFamilyMember">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="importResponsibleFamilyMemberOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="exportPatient">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="exportPatientOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listPrescription">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <!-- collection wrapper for displayFields -->
+                <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listPrescriptionOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for contents -->
+                <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="prescription" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createPrescription">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="getDoctorForSpeciality">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="speciality" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getDoctorForSpecialityOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for doctor -->
+                <xsd:element name="doctor" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="doctor" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createDoctor">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="deletePrescription">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getMetadata">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="metadataFormat" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getMetadataOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="metadata" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="retrievePrescription">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="retrieveDoctor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="importPrescription">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="importPrescriptionOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkPrescription">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for entities -->
+                <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="prescription" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkPrescriptionOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="deleteDoctor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getDependencies">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="getDependenciesOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for dependencies -->
+                <xsd:element name="dependencies" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="dependency" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkResponsibleFamilyMember">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for entities -->
+                <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="responsibleFamilyMember" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkResponsibleFamilyMemberOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="updateMergePrescription">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="listPatient">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <!-- collection wrapper for displayFields -->
+                <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listPatientOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for contents -->
+                <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="patient" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkDoctor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for entities -->
+                <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="doctor" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkDoctorOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createResponsibleFamilyMember">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="exportPrescription">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="exportPrescriptionOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createMergeDoctor">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="createMergePatient">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="exportResponsibleFamilyMember">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="exportResponsibleFamilyMemberOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkPatient">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for entities -->
+                <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="patient" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createBulkPatientOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="importPatient">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="importPatientOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="exportDoctor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="exportDoctorOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="alterStatusPatient">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="alterStatusPatientOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="patient" type="patientResponse" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="createMergePrescription">
+        <xsd:complexType/>
+    </xsd:element>
+</xsd:schema>

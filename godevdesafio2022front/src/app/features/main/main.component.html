@@ -1,0 +1,27 @@
+<p-panel styleClass="form-group" [toggleable]="true">
+    <p-header>
+        <span>Entities</span>
+    </p-header>
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12" routerLink="../patient" style="cursor: pointer;">{{"godev.godev2022desafio.patient" | translate}}</div>
+            <div class="ui-g-12" routerLink="../doctor" style="cursor: pointer;">{{"godev.godev2022desafio.doctor" | translate}}</div>
+            <div class="ui-g-12" routerLink="../prescription" style="cursor: pointer;">{{"godev.godev2022desafio.prescription" | translate}}</div>
+            <div class="ui-g-12" routerLink="../responsible-family-member" style="cursor: pointer;">{{"godev.godev2022desafio.responsible_family_member" | translate}}</div>
+        </div>
+    </div>
+</p-panel>
+<p-panel>
+    <p-header>
+        <span>Dependencies</span>
+    </p-header>
+    <div class="ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12" *ngFor="let dep of dependencies">
+                <span>{{dep.service}}: {{dep.version}}</span>
+            </div>
+        </div>
+    </div>
+</p-panel>
+<!--{CA:FILE_CONTENTS:START}-->
+<!--{CA:FILE_CONTENTS:END}-->

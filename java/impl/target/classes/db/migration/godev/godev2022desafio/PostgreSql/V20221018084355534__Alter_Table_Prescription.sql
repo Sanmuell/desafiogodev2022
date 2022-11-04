@@ -1,0 +1,1 @@
+alter table prescription add column patient UUID;

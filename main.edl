@@ -1,0 +1,53 @@
+domain godev
+
+entities {
+    generateExtraResources : true
+    securityType : secure
+    enumType : string
+}
+
+service godev2022desafio {
+    entities {
+
+      entity patient {
+        relationships {
+           OneToMany(responsibleDoctors){
+               type: aggregation
+           }
+
+           OneToMany(responsibleFamilyMembers){
+               type: aggregation
+           }
+
+           OneToMany(prescriptions){
+               type: aggregation
+//               opposite: patient
+           }
+        }
+      }
+      entity doctor {
+         generateCustomValidator: true
+         relationships {
+            OneToMany(prescriptions) {
+                type: aggregation
+                opposite: doctorResponsible
+            }
+         }
+      }
+
+       entity prescription {
+        generateCustomValidator: true
+         relationships {
+             ManyToOne(doctorResponsible){
+                  type: aggregation
+             }
+              ManyToOne(patient){
+                   type: aggregation
+              }
+         }
+       }
+
+
+       entity responsibleFamilyMember{}
+    }
+}
